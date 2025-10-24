@@ -12,6 +12,7 @@ const config = {
     paths: { base },
     prerender: {
       handleHttpError: 'warn', // prevent 404s from crashing build
+	  handleUnseenRoutes: 'ignore',
       entries: ['*'] // ensure all routes are prerendered
     }
   }
