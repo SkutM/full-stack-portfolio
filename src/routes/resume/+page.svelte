@@ -23,7 +23,7 @@
       </p>
       <p>
         Live Portfolio:
-        <a href="https://[your-portfolio-url].com" target="_blank" rel="noopener">[your-portfolio-url].com</a>
+        <!-- <a href="https://[your-portfolio-url].com" target="_blank" rel="noopener">[your-portfolio-url].com</a> -->
       </p>
     </section>
   </header>
