@@ -1,23 +1,72 @@
-node_modules
+# =========================
+# NODE / SVELTEKIT PROJECT
+# =========================
 
-# Output
-.output
-.vercel
-.netlify
-.wrangler
-/.svelte-kit
-/build
+# Dependencies
+node_modules/
 
-# OS
-.DS_Store
-Thumbs.db
+# Build Output
+.output/
+.vercel/
+.netlify/
+.wrangler/
+/.svelte-kit/
+/build/
 
-# Env
+# Environment Files
 .env
 .env.*
 !.env.example
 !.env.test
 
-# Vite
+# Vite Cache
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+
+# =========================
+# PYTHON PROJECT
+# =========================
+
+# Byte-compiled / Optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / Packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Virtual Environments
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+# Logs / Caches
+*.log
+*.pot
+.cache/
+coverage/
+.coverage
+htmlcov/
+
+# =========================
+# EDITORS & SYSTEM
+# =========================
+
+# VSCode / JetBrains
+.vscode/
+.idea/
+
+# Swap / Temp files
+*.swp
+*.swo

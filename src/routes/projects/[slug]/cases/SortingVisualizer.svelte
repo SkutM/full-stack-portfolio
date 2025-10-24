@@ -4,6 +4,7 @@
   export let project: Project;
 </script>
 
+
 <div class="container">
   <!-- Hero -->
   <article class="case card">
@@ -15,10 +16,12 @@
     <p class="short">{project.short}</p>
 
     {#if project.heroImage}
-      <figure class="hero-media">
-        <img src={project.heroImage} alt={`${project.title} main screen`} loading="lazy" />
-        <figcaption>Interactive visualizations of multiple sorting algorithms with per-step animation.</figcaption>
-      </figure>
+    <figure class="hero-media">
+        <img src="/images/sorting-visualizer/hero_sorting.png"
+            alt="Sorting Visualizer — Bubble Sort"
+            loading="lazy" />
+        <figcaption>Bubble Sort mid-insertion.</figcaption>
+    </figure>
     {/if}
   </article>
 
@@ -53,6 +56,15 @@
     </ul>
   </section>
 
+    <figure class="gallery">
+        <img
+            src="/images/sorting-visualizer/gif_sorting.gif"
+            alt="Sorting animation demo"
+            loading="lazy"
+        />
+        <figcaption>Real-time visualization of the Insertion Sort algorithm.</figcaption>
+    </figure>
+
   <!-- Architecture -->
   <section class="card section">
     <h2>Architecture</h2>
@@ -74,9 +86,24 @@
       <h2>Demo</h2>
       <p>Snapshots of different algorithms and states:</p>
       <div class="gallery">
-        {#each project.gallery as img}
-          <img src={img} alt="Sorting Visualizer screenshot" loading="lazy" />
-        {/each}
+    <figure class="hero-media">
+        <img src="/images/sorting-visualizer/quick_hero.png"
+            alt="Sorting Visualizer — Quick Sort"
+            loading="lazy" />
+        <figcaption>Quick Sort finding left and right elements for the pivot to compare against.</figcaption>
+    </figure>
+    <figure class="hero-media">
+        <img src="/images/sorting-visualizer/insertion_hero.png"
+            alt="Sorting Visualizer — Insertion Sort"
+            loading="lazy" />
+        <figcaption>Insertion Sort sorting in its final step.</figcaption>
+    </figure>
+    <figure class="hero-media">
+        <img src="/images/sorting-visualizer/merge_hero.png"
+            alt="Sorting Visualizer — Merge Sort"
+            loading="lazy" />
+        <figcaption>Merge Sort partitioning displayed.</figcaption>
+    </figure>
       </div>
     </section>
   {/if}
@@ -94,33 +121,146 @@
 </div>
 
 <style>
-  .container { width: min(1100px, 92vw); margin: 0 auto; padding: 24px 0 40px; }
+  .container {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+  padding: 24px 0 40px;
+}
 
-  .card { background:#151515; border:1px solid #222; border-left:3px solid #00bcd4; border-radius:10px; padding:18px 20px; }
-  .case { margin-bottom: 16px; }
+.card {
+  background: #151515;
+  border: 1px solid #222;
+  border-left: 3px solid #00bcd4;
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+.case {
+  margin-bottom: 16px;
+}
 
-  .case-head h1 { margin:0 0 6px; font-size: clamp(1.9rem, 3.5vw, 2.6rem); color:#e6edf3; }
-  .stack { color:#8b949e; margin:0; }
-  .short { color:#b0b0b0; margin:.5rem 0 1rem; line-height:1.6; }
+.case-head h1 {
+  margin: 0 0 6px;
+  font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+  color: #e6edf3;
+}
+.stack {
+  color: #8b949e;
+  margin: 0;
+}
+.short {
+  color: #b0b0b0;
+  margin: 0.5rem 0 1rem;
+  line-height: 1.6;
+}
 
-  .hero-media { margin: 10px 0 0; }
-  .hero-media img { width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid #222; }
-  .hero-media figcaption { color: #8b949e; font-size: .9rem; margin-top: .4rem; }
+/* === HERO IMAGE === */
+.hero-media {
+  margin: 20px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 900px;
+  width: 100%;
+}
+.hero-media img {
+  width: 50%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid #222;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  object-fit: contain;
+}
+.hero-media figcaption {
+  color: #8b949e;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
 
-  .section { margin-top: 14px; }
-  .section h2 { margin: 0 0 8px; font-size: 1.25rem; color: #e6edf3; }
+/* === GALLERY === */
+.gallery {
+  margin: 20px auto;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.gallery img {
+  width: 50%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid #222;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  object-fit: contain;
+}
+.gallery figcaption {
+  color: #8b949e;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
 
-  .bullets { margin: 0; padding-left: 1.1rem; }
-  .bullets li { color:#b0b0b0; margin-bottom:.5rem; line-height:1.55; }
 
-  .cols { display: grid; grid-template-columns: 1fr; gap: 12px; }
-  @media (min-width: 800px) { .cols { grid-template-columns: 1fr 1fr; } }
 
-  .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 8px; }
-  .gallery img { width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid #222; }
+/* === TEXT & STRUCTURE === */
+.section {
+  margin-top: 14px;
+}
+.section h2 {
+  margin: 0 0 8px;
+  font-size: 1.25rem;
+  color: #e6edf3;
+}
 
-  .links { display: flex; gap: 1.5rem; margin-top: 16px; flex-wrap: wrap; }
-  .links a { color:#00bcd4; text-decoration:none; font-weight:600; }
-  .links a:hover { text-decoration: underline; }
+.bullets {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+.bullets li {
+  color: #b0b0b0;
+  margin-bottom: 0.5rem;
+  line-height: 1.55;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 800px) {
+  .cols {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* === LINKS === */
+.links {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.links a {
+  color: #00bcd4;
+  text-decoration: none;
+  font-weight: 600;
+}
+.links a:hover {
+  text-decoration: underline;
+}
+
+/* === RESPONSIVE TWEAKS === */
+@media (max-width: 768px) {
+  .hero-media,
+  .gallery {
+    max-width: 95%;
+  }
+  .hero-media img,
+  .gallery img {
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
   
 </style>
