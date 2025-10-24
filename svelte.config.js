@@ -10,8 +10,12 @@ const config = {
   kit: {
     adapter: adapter(),
     paths: { base },
-    prerender: { handleHttpError: 'warn' }
+    prerender: {
+      handleHttpError: 'warn', // prevent 404s from crashing build
+      entries: ['*'] // ensure all routes are prerendered
+    }
   }
 };
+
 
 export default config;
