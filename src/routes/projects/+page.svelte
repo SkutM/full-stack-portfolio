@@ -1,5 +1,6 @@
 <script lang="ts">
   import { projects } from "$lib/projects/data";
+  import { base } from "$app/paths";
 </script>
 
 <div class="container">
@@ -14,7 +15,7 @@
             <li>{bullet}</li>
           {/each}
         </ul>
-        <a href={`/projects/${project.slug}`}>View Detail Page →</a>
+        <a href={`${base}/projects/${project.slug}`}>View Detail Page →</a>
       </div>
     {/each}
   </section>
