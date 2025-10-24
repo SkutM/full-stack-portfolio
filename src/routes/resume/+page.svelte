@@ -1,5 +1,6 @@
 <script lang="ts">
-  // no logic needed; this is a static resume component
+  import { projects } from "$lib/projects/data";
+  import { base } from "$app/paths";
 </script>
 
 <div class="resume-container">
@@ -111,7 +112,7 @@
           <strong>Vite Proxy</strong> and utilizing <strong>Alembic</strong> migrations for stable development.
         </li>
       </ul>
-      <a href="/projects/reading-tracker">View Detail Page →</a>
+      <a href="${base}/projects/reading-tracker">View Detail Page →</a>
     </div>
 
     <div class="project-item">
@@ -130,7 +131,7 @@
           readiness.
         </li>
       </ul>
-      <a href="/projects/skut-face">View Detail Page →</a>
+      <a href="${base}/projects/skut-face">View Detail Page →</a>
     </div>
 
     <div class="project-item">
@@ -145,7 +146,7 @@
           manipulation.
         </li>
       </ul>
-      <a href="/projects/sorting-visualizer">View Detail Page →</a>
+      <a href="${base}/projects/sorting-visualizer">View Detail Page →</a>
     </div>
   </section>
 
