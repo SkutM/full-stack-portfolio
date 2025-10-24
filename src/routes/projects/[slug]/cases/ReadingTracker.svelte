@@ -13,12 +13,12 @@
 
     <p class="short">{project.short}</p>
 
-    {#if project.heroImage}
-        <figure class="hero-media">
-        <img src={project.heroImage} alt={`${project.title} main interface`} loading="lazy" />
-        <figcaption>Secure, full-stack reading management application with JWT authentication.</figcaption>
-        </figure>
-    {/if}
+    <figure class="hero-media">
+        <img src="/images/reading-tracker/reading_tracker.png"
+            alt="Reading Tracker"
+            loading="lazy" />
+        <figcaption>Reading Tracker Display</figcaption>
+    </figure>
     </article>
 
     <!-- Problem & Solution -->
@@ -61,7 +61,14 @@
         reflections; prefetch keeps common actions snappy.
         </li>
     </ul>
+
     </section>
+        <figure class="gallery">
+        <img src="/images/reading-tracker/readingtracker_gif.gif"
+            alt="Reading Tracker gif"
+            loading="lazy" />
+        <figcaption>Reading Tracker Register/Login & CRUD</figcaption>
+    </figure>
 
     <!-- Architecture -->
     <section class="card section">
@@ -128,6 +135,51 @@
         </pre>
     </div>
     </section>
+
+    <!-- === DEMO (CRUD) === -->
+    <section class="section">
+        <h2>Demo — Full CRUD</h2>
+
+        <div class="demo-grid">
+            <figure>
+            <img
+                src="/images/reading-tracker/C.gif"
+                alt="Create a new book entry"
+                loading="lazy"
+            />
+            <figcaption><strong>Create</strong> — Add a new book (title, author, review, recommendation).</figcaption>
+            </figure>
+
+            <figure>
+            <img
+                src="/images/reading-tracker/R.gif"
+                alt="Read — list and filter books"
+                loading="lazy"
+            />
+            <figcaption><strong>Read</strong> — Browse your library.</figcaption>
+            </figure>
+
+            <figure>
+            <img
+                src="/images/reading-tracker/U.gif"
+                alt="Update book progress and notes"
+                loading="lazy"
+            />
+            <figcaption><strong>Update</strong> — Edit review, recommendation, and notes.</figcaption>
+            </figure>
+
+            <figure>
+            <img
+                src="/images/reading-tracker/D.gif"
+                alt="Delete a book entry"
+                loading="lazy"
+            />
+            <figcaption><strong>Delete</strong> — Remove an entry (with confirmation).</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    
 
 
 
