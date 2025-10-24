@@ -31,7 +31,7 @@ jobs:
       - name: Build SvelteKit
         run: npm run build
         env:
-          BASE_PATH: /full-stack-portfolio
+          BASE_PATH: /
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
