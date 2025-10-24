@@ -3,7 +3,7 @@
   import Header from "$lib/components/Header.svelte";
   import { fade } from "svelte/transition";
   import { page } from "$app/stores";
-  import { base } from "$ap/paths";
+  import { base } from "$app/paths";
 </script>
 
 <Header />
