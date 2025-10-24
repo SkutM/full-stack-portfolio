@@ -165,7 +165,7 @@
                 alt="Update book progress and notes"
                 loading="lazy"
             />
-            <figcaption><strong>Update</strong> — Edit review, recommendation, and notes.</figcaption>
+            <figcaption><strong>Update</strong> — Edit reviews, recommendations, and notes.</figcaption>
             </figure>
 
             <figure>
@@ -196,6 +196,91 @@
 </div>
 
 <style>
+/* === GALLERY (match SkutFace) === */
+.hero-media {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-media img {
+  display: block;
+  max-width: 75%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.hero-media figcaption {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #8b949e;
+  margin-top: 0.5rem;
+}
+.gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  max-width: 900px;
+}
+.gallery img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  border: 1px solid #222;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  object-fit: contain;
+}
+.gallery figcaption {
+  color: #8b949e;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* === TWO-COLUMN GRID (SkutFace .cols equivalent) === */
+.cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 800px) {
+  .cols {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* === CRUD DEMO GRID (style like .cols + figure styling) === */
+.demo-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 10px;
+}
+@media (min-width: 800px) {
+  .demo-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.demo-grid figure {
+  margin: 0;
+}
+.demo-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  border: 1px solid #222;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  object-fit: contain;
+}
+.demo-grid figcaption {
+  color: #8b949e;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
     .container { width: min(1100px, 92vw); margin: 0 auto; padding: 24px 0 40px; }
 
     .card {
