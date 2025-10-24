@@ -1,11 +1,5 @@
-// src/lib/projects/data.ts
-// ============================================
-// Single source of truth for all project data.
-// Each page (Home, Projects, Resume) imports from here.
-// Optional fields (heroImage, gallery) power detail pages.
-// ============================================
+// Project Data
 
-// src/lib/projects/data.ts
 export type Slug = 'reading-tracker' | 'skut-face' | 'sorting-visualizer';
 
 export type Project = {
@@ -18,8 +12,6 @@ export type Project = {
   heroImage?: string;
   gallery?: string[];
 };
-
-// export const projects: Project[] = [ ... ]
 
 
 export const projects: Project[] = [

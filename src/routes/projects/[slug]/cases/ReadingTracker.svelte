@@ -197,7 +197,7 @@
 </div>
 
 <style>
-/* === GALLERY (match SkutFace) === */
+/* === GALLERY === */
 .hero-media {
   display: flex;
   flex-direction: column;
@@ -240,7 +240,7 @@
   text-align: center;
 }
 
-/* === TWO-COLUMN GRID (SkutFace .cols equivalent) === */
+/* === TWO-COLUMN GRID === */
 .cols {
   display: grid;
   grid-template-columns: 1fr;
@@ -252,7 +252,7 @@
   }
 }
 
-/* === CRUD DEMO GRID (style like .cols + figure styling) === */
+/* === CRUD DEMO GRID === */
 .demo-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -282,6 +282,7 @@
   margin-top: 0.5rem;
   text-align: center;
 }
+
     .container { width: min(1100px, 92vw); margin: 0 auto; padding: 24px 0 40px; }
 
     .card {

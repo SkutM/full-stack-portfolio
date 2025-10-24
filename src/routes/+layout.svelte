@@ -1,5 +1,5 @@
 <script lang="ts">
-  import "$lib/app.css";   // this brings in your global styles
+  import "$lib/app.css";
   import Header from "$lib/components/Header.svelte";
   import { fade } from "svelte/transition";
   import { page } from "$app/stores";

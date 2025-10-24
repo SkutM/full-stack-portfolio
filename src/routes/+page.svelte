@@ -1,4 +1,4 @@
-<!-- src/routes/+page.svelte (Home refined) -->
+<!-- Home Page -->
 
 <script lang="ts">
   // no imports needed
@@ -9,10 +9,7 @@
     <h1>Scott Miller</h1>
     <p class="role">Full-Stack Developer</p>
     <p class="tagline">
-        I develop full-stack applications with <strong>SvelteKit/TypeScript</strong> on the frontend and
-    <strong>FastAPI/SQLAlchemy</strong> on the backend — secure, maintainable, and production-ready.
-    </p>
-
+        I build full-stack applications with <strong>SvelteKit</strong> and <strong>TypeScript</strong>, designed for security, scalability, and long-term maintainability.
 
     <div class="links">
       <a href="mailto:ssm011403@gmail.com">ssm011403@gmail.com</a>
@@ -39,7 +36,6 @@
 </div>
 
 <style>
-  /* Center content and control width */
   .container {
     width: min(1100px, 92vw);
     margin: 0 auto;
