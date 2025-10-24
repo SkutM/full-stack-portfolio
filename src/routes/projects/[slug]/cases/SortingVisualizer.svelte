@@ -2,6 +2,7 @@
 <script lang="ts">
   import type { Project } from '$lib/projects/data';
   export let project: Project;
+  import { base, assets } from '$app/paths';
 </script>
 
 
@@ -17,7 +18,7 @@
 
     {#if project.heroImage}
     <figure class="hero-media">
-        <img src="/images/sorting-visualizer/hero_sorting.png"
+        <img src={`${assets}/images/sorting-visualizer/hero_sorting.png`}
             alt="Sorting Visualizer — Bubble Sort"
             loading="lazy" />
         <figcaption>Bubble Sort mid-insertion.</figcaption>
@@ -58,7 +59,7 @@
 
     <figure class="gallery">
         <img
-            src="/images/sorting-visualizer/gif_sorting.gif"
+            src={`${assets}/images/sorting-visualizer/gif_sorting.gif`}
             alt="Sorting animation demo"
             loading="lazy"
         />
@@ -87,19 +88,19 @@
       <p>Snapshots of different algorithms and states:</p>
       <div class="gallery">
     <figure class="hero-media">
-        <img src="/images/sorting-visualizer/quick_hero.png"
+        <img src={`${assets}/images/sorting-visualizer/quick_hero.png`}
             alt="Sorting Visualizer — Quick Sort"
             loading="lazy" />
         <figcaption>Quick Sort finding left and right elements for the pivot to compare against.</figcaption>
     </figure>
     <figure class="hero-media">
-        <img src="/images/sorting-visualizer/insertion_hero.png"
+        <img src={`${assets}/images/sorting-visualizer/insertion_hero.png`}
             alt="Sorting Visualizer — Insertion Sort"
             loading="lazy" />
         <figcaption>Insertion Sort sorting in its final step.</figcaption>
     </figure>
     <figure class="hero-media">
-        <img src="/images/sorting-visualizer/merge_hero.png"
+        <img src={`${assets}/images/sorting-visualizer/merge_hero.png`}
             alt="Sorting Visualizer — Merge Sort"
             loading="lazy" />
         <figcaption>Merge Sort partitioning displayed.</figcaption>
@@ -110,7 +111,7 @@
 
   <!-- Links -->
   <section class="links">
-    <a href="/projects">← Back to Projects</a>
+    <a href="{base}/projects">← Back to Projects</a>
     {#if project.links.repo}
       <a href={project.links.repo} target="_blank" rel="noopener">Repo →</a>
     {/if}

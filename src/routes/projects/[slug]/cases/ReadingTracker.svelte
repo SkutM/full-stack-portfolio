@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { Project } from '$lib/projects/data';
     export let project: Project;
+    import { base, assets } from '$app/paths';
 </script>
 
 <div class="container">
@@ -14,7 +15,7 @@
     <p class="short">{project.short}</p>
 
     <figure class="hero-media">
-        <img src="/images/reading-tracker/reading_tracker.png"
+        <img src={`${assets}/images/reading-tracker/reading_tracker.png`}
             alt="Reading Tracker"
             loading="lazy" />
         <figcaption>Reading Tracker Display</figcaption>
@@ -64,7 +65,7 @@
 
     </section>
         <figure class="gallery">
-        <img src="/images/reading-tracker/readingtracker_gif.gif"
+        <img src={`${assets}/images/reading-tracker/readingtracker_gif.gif`}
             alt="Reading Tracker gif"
             loading="lazy" />
         <figcaption>Reading Tracker Register/Login & CRUD</figcaption>
@@ -143,7 +144,7 @@
         <div class="demo-grid">
             <figure>
             <img
-                src="/images/reading-tracker/C.gif"
+                src={`${assets}/images/reading-tracker/C.gif`}
                 alt="Create a new book entry"
                 loading="lazy"
             />
@@ -152,7 +153,7 @@
 
             <figure>
             <img
-                src="/images/reading-tracker/R.gif"
+                src={`${assets}/images/reading-tracker/R.gif`}
                 alt="Read — list and filter books"
                 loading="lazy"
             />
@@ -161,7 +162,7 @@
 
             <figure>
             <img
-                src="/images/reading-tracker/U.gif"
+                src={`${assets}/images/reading-tracker/U.gif`}
                 alt="Update book progress and notes"
                 loading="lazy"
             />
@@ -170,7 +171,7 @@
 
             <figure>
             <img
-                src="/images/reading-tracker/D.gif"
+                src={`${assets}/images/reading-tracker/D.gif`}
                 alt="Delete a book entry"
                 loading="lazy"
             />
@@ -185,7 +186,7 @@
 
   <!-- Links -->
     <section class="links">
-    <a href="/projects">← Back to Projects</a>
+    <a href="{base}/projects">← Back to Projects</a>
     {#if project.links.repo}
         <a href={project.links.repo} target="_blank" rel="noopener">Repo →</a>
     {/if}

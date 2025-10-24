@@ -1,43 +1,24 @@
-<script lang="ts">
-  import { page } from '$app/stores';
-
-  const navItems = [
-    { name: 'Home', href: '/' },
-    { name: 'Projects', href: '/projects' },
-    { name: 'Résumé', href: '/resume' }, // keep 'Resume' if you prefer
-  ];
-
-  // helper: marks /projects active on /projects/anything too
-  const isActive = (path: string, href: string) =>
-    href === '/' ? path === '/' : path.startsWith(href);
+<script>
+  import { base } from '$app/paths';
 </script>
 
-<header>
+<header class="header">
   <div class="logo">
-    <a href="/" data-sveltekit-preload-data>Scott Miller</a>
+    <a href="{base}/" class="logo-link">Scott Miller</a>
   </div>
 
   <nav>
-    <ul>
-      {#each navItems as item}
-        <li>
-          <a
-            href={item.href}
-            data-sveltekit-preload-data
-            class:active={isActive($page.url.pathname, item.href)}
-            aria-current={isActive($page.url.pathname, item.href) ? 'page' : undefined}
-          >
-            {item.name}
-          </a>
-        </li>
-      {/each}
-    </ul>
+    <a href="{base}/" class="nav-link">Home</a>
+    <a href="{base}/projects" class="nav-link">Projects</a>
+    <a href="{base}/resume" class="nav-link">Résumé</a>
   </nav>
 </header>
 
 <style>
   header {
-    position: sticky; top: 0; z-index: 10;           /* optional: stays visible */
+    position: sticky;
+    top: 0;
+    z-index: 10;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -46,34 +27,27 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
 
-  .logo a {
+  .logo-link {
     font-size: 1.5em;
     font-weight: bold;
-    color: #00bcd4;                                   /* your blue accent */
+    color: #00bcd4;
     text-decoration: none;
   }
 
-  nav ul {
+  nav {
     display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    gap: 25px;
   }
 
-  nav li { margin-left: 25px; }
-
-  nav a {
+  .nav-link {
     text-decoration: none;
     color: #b0b0b0;
     font-weight: 500;
     transition: color 0.2s, border-bottom 0.2s;
   }
 
-  nav a:hover { color: #ffffff; }
-
-  nav a.active,
-  nav a[aria-current="page"] {
+  .nav-link:hover {
     color: #ffffff;
-    border-bottom: 2px solid #00bcd4;                 /* active underline */
+    border-bottom: 2px solid #00bcd4;
   }
 </style>

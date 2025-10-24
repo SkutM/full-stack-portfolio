@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Project } from '$lib/projects/data';
   export let project: Project;
+  import { base, assets } from '$app/paths';
 </script>
 
 <div class="container">
@@ -14,7 +15,7 @@
     <p class="short">{project.short}</p>
 
     <figure class="hero-media">
-        <img src="/images/skutface/skutface_login_page.png"
+        <img src={`${assets}/images/skutface/skutface_login_page.png`}
             alt="Skutface login"
             loading="lazy" />
         <figcaption>SkutFace Login Screen</figcaption>
@@ -56,7 +57,7 @@
   </section>
 
     <figure class="gallery">
-        <img src="/images/skutface/skutface_gif.gif"
+        <img src={`${assets}/images/skutface/skutface_gif.gif`}
             alt="Skutface login"
             loading="lazy" />
         <figcaption>SkutFace Register & Login Demo</figcaption>
