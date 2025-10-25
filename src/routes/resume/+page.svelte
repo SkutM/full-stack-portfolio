@@ -19,7 +19,7 @@
 
 <div class:dark-mode={darkMode} class="resume-container">
   <button class="theme-toggle" on:click={toggleTheme}>
-    {#if darkMode} ☀️ Light Mode {:else} 🌙 Dark Mode {/if}
+    {#if darkMode} ☀️ Light Mode (Recommended) {:else} 🌙 Dark Mode{/if}
   </button>
 
   <header class="header">
