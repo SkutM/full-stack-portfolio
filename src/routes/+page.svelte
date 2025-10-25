@@ -1,22 +1,61 @@
 <!-- Home Page -->
 
 <script lang="ts">
-  // no imports needed
+  import { onMount } from 'svelte';
+
+  let typed = '';
+  let showCursor = true;
+  const fullText = 'Scott Miller';
+  const typingSpeed = 120; // ms per character
+  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+  onMount(async () => {
+    if (
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    ) {
+      typed = fullText;
+      showCursor = false; // instantly hide if no animation
+      return;
+    }
+
+    for (let i = 0; i < fullText.length; i++) {
+      typed += fullText[i];
+      await sleep(typingSpeed);
+    }
+
+    showCursor = false; // hides it after typing completes
+  });
 </script>
+
+<!-- Fixed, centered typed name near the top of the screen -->
+<h1 class="name-banner">
+  {typed}{#if showCursor}<span class="cursor" aria-hidden="true"></span>{/if}
+</h1>
 
 <div class="container">
   <section class="hero">
-    <h1>Scott Miller</h1>
     <p class="role">Full-Stack Developer</p>
+
     <p class="tagline">
-        I build full-stack applications with <strong>SvelteKit</strong> and <strong>TypeScript</strong>, designed for security, scalability, and long-term maintainability.
+      I build full-stack applications with <strong>SvelteKit</strong> and
+      <strong>TypeScript</strong>, designed for security, scalability, and
+      long-term maintainability.
+    </p>
 
     <div class="links">
       <a href="mailto:ssm011403@gmail.com">ssm011403@gmail.com</a>
       <span class="dot">•</span>
-      <a href="https://www.linkedin.com/in/scott-miller-90456b2b7" target="_blank" rel="noopener">LinkedIn</a>
+      <a
+        href="https://www.linkedin.com/in/scott-miller-90456b2b7"
+        target="_blank"
+        rel="noopener"
+        >LinkedIn</a
+      >
       <span class="dot">•</span>
-      <a href="https://github.com/SkutM" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/SkutM" target="_blank" rel="noopener"
+        >GitHub</a
+      >
     </div>
   </section>
 
@@ -29,40 +68,107 @@
     </ul>
 
     <p class="blurb">
-      Recently: shipped a JWT-secured Reading Tracker (Vite proxy + Alembic migrations) and
-      a DeepFace/TensorFlow facial auth prototype (Flask + Gunicorn).
+      Recently: shipped a JWT-secured Reading Tracker (Vite proxy + Alembic
+      migrations) and a DeepFace/TensorFlow facial auth prototype (Flask +
+      Gunicorn).
     </p>
   </section>
 </div>
 
+<div class="action-buttons">
+  <a href="/projects" class="btn">Projects</a>
+  <a href="/resume.pdf" class="btn">Résumé</a>
+</div>
+
 <style>
+
+  /* Typed name banner */
+  .name-banner {
+    position: fixed;
+    top: 125px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    padding: 0 12px;
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    font-family: inherit;
+    color: #00bcd4;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.2em;
+    vertical-align: -0.2em;
+    background: #e6edf3;
+    margin-left: 6px;
+    animation: blink 0.8s step-end infinite;
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* Page layout */
   .container {
     width: min(1100px, 92vw);
     margin: 0 auto;
-    padding: 24px 0 40px;
+    padding: 180px 0 40px;
   }
 
   /* Hero */
-  .hero { margin: 8px 0 24px; }
-  .hero h1 { margin: 0 0 6px; font-size: clamp(2rem, 4vw, 3rem); }
-  .role { color: #b0b0b0; margin: 0 0 12px; font-size: 1.1rem; }
+  .hero {
+    margin-top: -50px;
+    text-align: center;
+  }
+
+  .role {
+    color: #b0b0b0;
+    font-size: 1.1rem;
+    margin: 8px 0 40px;
+  }
 
   .tagline {
     max-width: 60ch;
     line-height: 1.6;
     color: #b0b0b0;
-    margin: 0;
+    margin: 0 auto;
   }
-  .tagline strong { font-weight: 600; color: #e6edf3; }
+
+  .tagline strong {
+    font-weight: 600;
+    color: #e6edf3;
+  }
 
   .links {
     margin-top: 14px;
-    display: flex; flex-wrap: wrap; align-items: center;
-    gap: .5rem .75rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem 0.75rem;
   }
-  .links a { color: #00bcd4; font-weight: 500; text-decoration: none; }
-  .links a:hover { color: #fff; text-decoration: underline; }
-  .links .dot { color: #444; }
+
+  .links a {
+    color: #00bcd4;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .links a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  .links .dot {
+    color: #444;
+  }
 
   /* Card/section */
   .card {
@@ -73,13 +179,62 @@
     padding: 16px 18px;
   }
 
-  .highlights { margin-top: 18px; }
-  .highlights h2 { margin: 0 0 10px; color: #e6edf3; font-size: 1.25rem; }
-
-  .stack {
-    list-style: none; padding: 0; margin: 0 0 10px;
-    color: #b0b0b0; display: grid; gap: 6px;
+  .highlights {
+    margin-top: 55px;
+    text-align: center;
   }
 
-  .blurb { margin: 0; color: #8b949e; font-size: .95rem; }
+  .highlights h2 {
+    margin: 0 0 10px;
+    color: #e6edf3;
+    font-size: 1.25rem;
+  }
+
+  .stack {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    color: #b0b0b0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .blurb {
+    margin: 0;
+    color: #8b949e;
+    font-size: 0.95rem;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .cursor {
+      display: none;
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10rem;
+    margin-top: 30px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    border-radius: 999px;
+    background-color: #456064ff;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.4rem;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 0 8px rgba(0, 188, 212, 0.3);
+  }
+
+  .btn:hover {
+    background-color: #009bb0;
+    transform: translateY(-2px);
+    box-shadow: 0 0 12px rgba(0, 188, 212, 0.5);
+  }
 </style>
