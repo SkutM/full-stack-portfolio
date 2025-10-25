@@ -1,9 +1,27 @@
 <script lang="ts">
   import { projects } from "$lib/projects/data";
   import { base } from "$app/paths";
+  import { onMount } from "svelte";
+
+  let darkMode = false; // Always start in light mode
+
+  onMount(() => {
+    // Optional: if you want to clear old theme preference, uncomment below
+    // localStorage.removeItem("theme");
+  });
+
+  function toggleTheme() {
+    darkMode = !darkMode;
+    localStorage.setItem("theme", darkMode ? "dark" : "light");
+  }
 </script>
 
-<div class="resume-container">
+
+<div class:dark-mode={darkMode} class="resume-container">
+  <button class="theme-toggle" on:click={toggleTheme}>
+    {#if darkMode} ☀️ Light Mode {:else} 🌙 Dark Mode {/if}
+  </button>
+
   <header class="header">
     <h1>Scott Miller</h1>
     <h2>Full-Stack Software Developer</h2>
@@ -27,7 +45,6 @@
           Download as PDF
         </button>
       </p>
-
     </section>
   </header>
 
@@ -160,136 +177,63 @@
 </div>
 
 <style>
+  :root {
+    /* Pure white + black body, with subtle contrast for name/links */
+    --bg: #ffffff;
+    --text: #000000;
+    --link: #2b2b2b;   /* name + links */
+    --accent: #3a3a3a; /* subheads, borders */
+  }
+
+  .dark-mode {
+    --bg: #1a1a1a;
+    --text: #e6edf3;
+    --link: #00bcd4;
+    --accent: #00bcd4;
+  }
+
   .resume-container {
+    position: relative;              /* ✅ key fix: anchor the toggle here */
+    background-color: var(--bg);
+    color: var(--text);
     padding: 40px;
     max-width: 900px;
     margin: 40px auto;
     text-align: left;
-    background-color: #1a1a1a;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.4s ease, color 0.4s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   }
 
-  hr {
-    border: 0;
-    height: 1px;
-    background: #333;
-    margin: 30px 0;
-  }
-
-  h1 {
-    font-size: 2.2em;
-    margin-bottom: 0px;
-    color: #00bcd4;
-  }
-  h2 {
-    font-size: 1.2em;
-    color: #b0b0b0;
-    margin-top: 5px;
-  }
-
-  a {
-    color: #00bcd4;
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-
-  .contact-info p {
+  .theme-toggle {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;                     /* ✅ make sure it sits above */
+    border: 1px solid var(--link);
+    background: transparent;
+    color: var(--link);
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
     font-size: 0.9em;
-    margin: 2px 0;
-    color: #b0b0b0;
+    line-height: 1;
+    transition: background 0.2s ease, color 0.2s ease;
   }
 
-  h3 {
-    font-size: 1.5em;
-    border-bottom: 2px solid #00bcd4;
-    padding-bottom: 5px;
-    margin-top: 30px;
-    margin-bottom: 15px;
+  .theme-toggle:hover {
+    background: var(--link);
+    color: var(--bg);
   }
 
-  h4 {
-    font-size: 1.1em;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    color: #e6edf3;
-  }
+  /* keep your existing styles … */
+  h1 { color: var(--link); }
+  h2 { color: var(--accent); }
+  a  { color: var(--link); }
+  h3 { border-bottom: 2px solid var(--link); }
 
-  .summary p {
-    line-height: 1.5;
-    color: #b0b0b0;
-  }
-
-  .dates {
-    font-style: italic;
-    font-size: 0.9em;
-    color: #8b949e;
-    margin-bottom: 10px;
-  }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin-top: 15px;
-  }
-
-  .skills-grid ul {
-    list-style-type: none;
-    padding-left: 0;
-  }
-
-  .skills-grid li {
-    margin-bottom: 5px;
-    color: #b0b0b0;
-    font-size: 0.95em;
-  }
-
-  .project-item {
-    margin-top: 25px;
-    padding-left: 15px;
-    border-left: 3px solid #00bcd4;
-    margin-bottom: 30px;
-  }
-
-  .project-item ul {
-    padding-left: 20px;
-    list-style-type: disc;
-  }
-
-  .project-item li {
-    margin-bottom: 8px;
-    line-height: 1.4;
-  }
-
-  .project-item a {
-    color: #00bcd4;
-    font-weight: bold;
-    margin-top: 10px;
-    display: inline-block;
-  }
-
-  .pdf-button {
-  background: none;
-  border: 1px solid #00bcd4;
-  color: #00bcd4;
-  padding: 4px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9em;
-  transition: all 0.2s ease;
-  margin-top: 8px;
-  }
-  .pdf-button:hover {
-    background: #00bcd4;
-    color: #111;
-  }
   @media print {
-    /* hide the button itself in the PDF */
-    .pdf-button { display: none; }
+    .theme-toggle { display: none; }
+    .resume-container { box-shadow: none; }
   }
-
 </style>
