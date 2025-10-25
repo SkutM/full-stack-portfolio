@@ -9,6 +9,18 @@
   const fullText = 'Scott Miller';
   const typingSpeed = 120; // ms per character
   const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+  let showLines = false;
+
+  onMount(() => {
+    const checkWidth = () => {
+      showLines = window.innerWidth >= 1200;
+    };
+
+    checkWidth(); // check immediately
+    window.addEventListener('resize', checkWidth);
+
+    return () => window.removeEventListener('resize', checkWidth);
+  });
 
   onMount(async () => {
     if (
@@ -82,12 +94,15 @@
   <a href="{base}/resume" class="btn">Résumé</a>
 </div>
 
-<div class="edge-lines" aria-hidden="true">
-  {#each Array(4) as _, i}
-    <div class={`l${i+1}`}></div>
-    <div class={`r${i+1}`}></div>
-  {/each}
-</div>
+{#if showLines}
+  <div class="edge-lines" aria-hidden="true">
+    {#each Array(4) as _, i}
+      <div class={`l${i+1}`}></div>
+      <div class={`r${i+1}`}></div>
+    {/each}
+  </div>
+{/if}
+
 
 
 
