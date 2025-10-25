@@ -23,8 +23,11 @@
         <a href="https://github.com/SkutM" target="_blank" rel="noopener">github.com/SkutM</a>
       </p>
       <p>
-        Live Portfolio:
+        <button class="pdf-button" on:click={() => window.print()}>
+          Download as PDF
+        </button>
       </p>
+
     </section>
   </header>
 
@@ -46,7 +49,7 @@
       <div>
         <h4>Frontend & Frameworks</h4>
         <ul>
-          <li><strong>Svelte / SvelteKit</strong> (Primary)</li>
+          <li><strong>Svelte / SvelteKit</strong></li>
           <li>TypeScript / JavaScript (ES6+)</li>
           <li>HTML5 / CSS3 / SCSS</li>
         </ul>
@@ -55,7 +58,7 @@
         <h4>Backend & API</h4>
         <ul>
           <li><strong>FastAPI</strong> (REST APIs)</li>
-          <li><strong>Python</strong> (Advanced) / Flask</li>
+          <li><strong>Python</strong> / Flask</li>
           <li>JWT / Passlib (Security)</li>
         </ul>
       </div>
@@ -63,7 +66,7 @@
         <h4>Database & Tools</h4>
         <ul>
           <li><strong>SQLAlchemy (ORM)</strong> / <strong>Alembic</strong></li>
-          <li>SQLite / PostgreSQL (Basic)</li>
+          <li>SQLite / PostgreSQL</li>
           <li>Pydantic / Git / GitHub</li>
         </ul>
       </div>
@@ -268,4 +271,25 @@
     margin-top: 10px;
     display: inline-block;
   }
+
+  .pdf-button {
+  background: none;
+  border: 1px solid #00bcd4;
+  color: #00bcd4;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: all 0.2s ease;
+  margin-top: 8px;
+  }
+  .pdf-button:hover {
+    background: #00bcd4;
+    color: #111;
+  }
+  @media print {
+    /* hide the button itself in the PDF */
+    .pdf-button { display: none; }
+  }
+
 </style>

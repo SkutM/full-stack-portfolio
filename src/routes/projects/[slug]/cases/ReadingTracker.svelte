@@ -2,6 +2,34 @@
     import type { Project } from '$lib/projects/data';
     export let project: Project;
     import { base, assets } from '$app/paths';
+
+        // smooth-scroll the opened <details> into view
+    function scrollOnOpen(node: HTMLDetailsElement) {
+      const onToggle = () => {
+        if (!node.open) return;
+
+        requestAnimationFrame(() => {
+          const prefersReduced =
+            typeof window !== 'undefined' &&
+            window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+          const rect = node.getBoundingClientRect();
+          const scrollY = window.scrollY + rect.bottom; // base position
+          const offset = -700; // pixels extra down the page (increase if you want lower)
+          const target = scrollY + offset;
+
+          window.scrollTo({
+            top: target,
+            behavior: prefersReduced ? 'auto' : 'smooth'
+          });
+        });
+      };
+
+      node.addEventListener('toggle', onToggle);
+      return { destroy() { node.removeEventListener('toggle', onToggle); } };
+    }
+
+
 </script>
 
 <div class="container">
@@ -138,50 +166,59 @@
     </section>
 
     <!-- === DEMO (CRUD) === -->
-    <section class="section">
-        <h2>Demo — Full CRUD</h2>
+    <section class="card section">
+      <h2>Demo — Full CRUD</h2>
 
-        <div class="demo-grid">
-            <figure>
+      <div class="crud-pills">
+        <details use:scrollOnOpen>
+          <summary>Create — Register/Add Book</summary>
+          <figure class="gallery">
             <img
-                src={`${assets}/images/reading-tracker/C.gif`}
-                alt="Create a new book entry"
-                loading="lazy"
+              src={`${assets}/images/reading-tracker/C.gif`}
+              alt="Create a new book entry"
+              loading="lazy"
             />
             <figcaption><strong>Create</strong> — Add a new book (title, author, review, recommendation).</figcaption>
-            </figure>
+          </figure>
+        </details>
 
-            <figure>
+        <details use:scrollOnOpen>
+          <summary>Read — Browse / Filter</summary>
+          <figure class="gallery">
             <img
-                src={`${assets}/images/reading-tracker/R.gif`}
-                alt="Read — list and filter books"
-                loading="lazy"
+              src={`${assets}/images/reading-tracker/R.gif`}
+              alt="Read — list and filter books"
+              loading="lazy"
             />
             <figcaption><strong>Read</strong> — Browse your library.</figcaption>
-            </figure>
+          </figure>
+        </details>
 
-            <figure>
+        <details use:scrollOnOpen>
+          <summary>Update — Edit Review/Notes</summary>
+          <figure class="gallery">
             <img
-                src={`${assets}/images/reading-tracker/U.gif`}
-                alt="Update book progress and notes"
-                loading="lazy"
+              src={`${assets}/images/reading-tracker/U.gif`}
+              alt="Update book progress and notes"
+              loading="lazy"
             />
             <figcaption><strong>Update</strong> — Edit reviews, recommendations, and notes.</figcaption>
-            </figure>
+          </figure>
+        </details>
 
-            <figure>
+        <details use:scrollOnOpen>
+          <summary>Delete — Remove Entry</summary>
+          <figure class="gallery">
             <img
-                src={`${assets}/images/reading-tracker/D.gif`}
-                alt="Delete a book entry"
-                loading="lazy"
+              src={`${assets}/images/reading-tracker/D.gif`}
+              alt="Delete a book entry"
+              loading="lazy"
             />
             <figcaption><strong>Delete</strong> — Remove an entry (with confirmation).</figcaption>
-            </figure>
-        </div>
+          </figure>
+        </details>
+      </div>
     </section>
-
-    
-
 
 
   <!-- Links -->
@@ -311,4 +348,82 @@
     .links { display: flex; gap: 1.5rem; margin-top: 16px; flex-wrap: wrap; }
     .links a { color:#00bcd4; text-decoration:none; font-weight:600; }
     .links a:hover { text-decoration: underline; }
+
+    /* --- CRUD pills (click-to-reveal) --- */
+.crud-pills {
+  display: flex;
+  flex-direction: column;   /* stack vertically */
+  gap: 12px;
+  margin-top: 8px;
+  max-width: 900px;         /* optional: keep content narrow */
+  margin-inline: auto;      /* optional: center the column */
+}
+
+@media (min-width: 800px) {
+  .crud-pills {
+    flex-direction: column; /* stay as a column on wide screens too */
+    flex-wrap: nowrap;
+  }
+}
+
+/* Each expandable card */
+.crud-pills details {
+  flex: 0 0 auto;
+  width: 100%;
+  min-width: 0;             /* ignore previous min-width */
+  border-radius: 8px;
+  background: #121212;
+  border: 1px solid #222;
+  border-left: 3px solid #00bcd4;
+  overflow: hidden;
+}
+
+/* Summary “tab” */
+.crud-pills summary {
+  cursor: pointer;
+  list-style: none;             /* remove default marker in most browsers */
+  padding: 10px 14px;
+  color: #e6edf3;
+  font-weight: 600;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #151515;
+  border-radius: 8px 8px 0 0;   /* only top corners rounded */
+  transition: background 0.2s ease;
+}
+
+/* caret */
+.crud-pills summary::before {
+  content: "▸";
+  opacity: 0.7;
+  transform: translateY(1px);
+}
+.crud-pills details[open] summary::before {
+  content: "▾";
+}
+
+.crud-pills summary:hover {
+  background: #0f0f0f;
+}
+
+/* Content area inside the expandable card */
+.crud-pills details > .gallery {
+  padding: 12px 14px 16px;
+  background: #151515;
+  border-top: 1px solid #222;
+}
+
+/* Reuse your gallery image style; add here in case this section is isolated */
+.crud-pills details > .gallery img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  border: 1px solid #222;
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  object-fit: contain;
+}
+
 </style>

@@ -11,11 +11,44 @@
       <div class="project-item">
         <div class="project-visual">
           {#if project.slug === 'reading-tracker'}
-            <img src={`${assets}/images/reading-tracker/reading_tracker.png`} alt="Reading Tracker Preview" loading="lazy" />
+            <img
+              class="static"
+              src={`${assets}/images/reading-tracker/reading_tracker.png`}
+              alt="Reading Tracker Preview"
+              loading="lazy"
+            />
+            <img
+              class="animated"
+              src={`${assets}/images/reading-tracker/U.gif`}
+              alt="Reading Tracker Animated Preview"
+              loading="lazy"
+            />
           {:else if project.slug === 'skut-face'}
-            <img src={`${assets}/images/skut-face/hero_skutface.png`} alt="Skut-Face Preview" loading="lazy" />
+            <img
+              class="static"
+              src={`${assets}/images/skutface/skutface_login_page.png`}
+              alt="Skut-Face Preview"
+              loading="lazy"
+            />
+            <img
+              class="animated"
+              src={`${assets}/images/skutface/skutface_gif.gif`}
+              alt="Skut-Face Animated Preview"
+              loading="lazy"
+            />
           {:else if project.slug === 'sorting-visualizer'}
-            <img src={`${assets}/images/sorting-visualizer/hero_sorting.png`} alt="Sorting Visualizer Preview" loading="lazy" />
+            <img
+              class="static"
+              src={`${assets}/images/sorting-visualizer/merge_hero.png`}
+              alt="Sorting Visualizer Preview"
+              loading="lazy"
+            />
+            <img
+              class="animated"
+              src={`${assets}/images/sorting-visualizer/gif_sorting.gif`}
+              alt="Sorting Visualizer Animated Preview"
+              loading="lazy"
+            />
           {/if}
         </div>
 
@@ -72,23 +105,48 @@
     }
   }
 
+  /* --- Image hover swap --- */
   .project-visual {
+    position: relative;
     flex: 0 0 220px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #0e0e0e;
+    /* background: #0e0e0e; */
     padding: 10px;
+    overflow: hidden;
   }
 
   .project-visual img {
     width: 100%;
     height: auto;
-    border-radius: 8px;
     object-fit: cover;
-    border: 1px solid #222;
+    transition: opacity 0.2s ease;
+    display: block;
+    border-radius: 8px;
   }
 
+  .project-visual img.animated {
+    position: absolute; 
+    inset: 0;                /* top:0; right:0; bottom:0; left:0 */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .project-item:hover .project-visual img.static {
+    opacity: 0;
+  }
+
+  .project-item:hover .project-visual img.animated {
+    opacity: 1;
+  }
+
+  /* --- Content --- */
   .project-content {
     flex: 1;
     padding: 1rem 1.25rem;

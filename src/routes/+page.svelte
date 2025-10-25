@@ -2,6 +2,7 @@
 
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { base, assets } from '$app/paths';
 
   let typed = '';
   let showCursor = true;
@@ -26,6 +27,7 @@
 
     showCursor = false; // hides it after typing completes
   });
+
 </script>
 
 <!-- Fixed, centered typed name near the top of the screen -->
@@ -76,9 +78,18 @@
 </div>
 
 <div class="action-buttons">
-  <a href="/projects" class="btn">Projects</a>
-  <a href="/resume.pdf" class="btn">Résumé</a>
+  <a href="{base}/projects" class="btn">Projects</a>
+  <a href="{base}/resume" class="btn">Résumé</a>
 </div>
+
+<div class="edge-lines" aria-hidden="true">
+  {#each Array(4) as _, i}
+    <div class={`l${i+1}`}></div>
+    <div class={`r${i+1}`}></div>
+  {/each}
+</div>
+
+
 
 <style>
 
@@ -147,8 +158,10 @@
   }
 
   .links {
-    margin-top: 14px;
+    position: relative;
+    top: 20px;
     display: flex;
+    left: 0px;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
@@ -216,12 +229,12 @@
     display: flex;
     justify-content: center;
     gap: 10rem;
-    margin-top: 30px;
+    margin-top: 65px;
   }
 
   .btn {
     display: inline-block;
-    padding: 1.2rem 3rem;
+    padding: 1.6rem 4rem;
     border-radius: 999px;
     background-color: #456064ff;
     color: #fff;
@@ -237,4 +250,44 @@
     transform: translateY(-2px);
     box-shadow: 0 0 12px rgba(0, 188, 212, 0.5);
   }
+
+
+  .edge-lines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Base line style */
+.edge-lines div {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 6px;             /* thickness */
+  border-radius: 2px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 140, 200, 0.25),
+    rgba(0, 40, 80, 0.08),
+    rgba(0, 140, 200, 0.25)
+  );
+  pointer-events: none;
+}
+
+/* Left side lines */
+.edge-lines .l1 { left: 24px; }
+.edge-lines .l2 { left: 70px; opacity: 0.5; }
+.edge-lines .l3 { left: 120px; opacity: 0.35; }
+.edge-lines .l4 { left: 180px; opacity: 0.25; }
+
+/* Right side lines */
+.edge-lines .r1 { right: 24px; }
+.edge-lines .r2 { right: 70px; opacity: 0.5; }
+.edge-lines .r3 { right: 120px; opacity: 0.35; }
+.edge-lines .r4 { right: 180px; opacity: 0.25; }
+
+
+
+
 </style>
