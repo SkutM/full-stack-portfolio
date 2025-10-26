@@ -47,6 +47,9 @@
         target="_blank"
         rel="noopener"
       >🚀 Try it out (Vercel Account Required)</a>
+      <p class="note">
+        Note: Backend hosted on Render — it may take a few seconds to wake up on first load.
+      </p>
       {#if project.links.repo}
         <a class="btn ghost" href={project.links.repo} target="_blank" rel="noopener">Repo</a>
       {/if}
@@ -258,6 +261,16 @@ Open Library fetch (server) → persist cover URL → response → UI updates
 
   /* CTA */
   .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 10px 0 4px; }
+  .cta-row .note {
+    flex: 1 1 100%;      /* full row */
+    margin: 4px 0 0;
+    text-align: left;    /* or center, your call */
+  }
+
+  /* (Optional) keep buttons aligned nicely after the note */
+  .cta-row .btn {
+    flex: 0 0 auto;
+  }
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 10px 14px; border-radius: 8px;
@@ -319,4 +332,12 @@ Open Library fetch (server) → persist cover URL → response → UI updates
   .links { display: flex; gap: 1.5rem; margin-top: 16px; flex-wrap: wrap; }
   .links a { color: #00bcd4; text-decoration: none; font-weight: 600; }
   .links a:hover { text-decoration: underline; }
+  .note {
+  font-size: 0.9rem;
+  color: #8b949e;
+  margin-top: 6px;
+  text-align: center;
+  font-style: italic;
+}
+
 </style>
