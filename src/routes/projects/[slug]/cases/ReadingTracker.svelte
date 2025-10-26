@@ -2,32 +2,42 @@
   import type { Project } from '$lib/projects/data';
   export let project: Project;
   import { base, assets } from '$app/paths';
+// +page.svelte (or the component file)
+import { tick } from 'svelte';
 
-  // smooth-scroll the opened <details> into view
-  function scrollOnOpen(node: HTMLDetailsElement) {
-    const onToggle = () => {
-      if (!node.open) return;
+function scrollOnOpen(node: HTMLDetailsElement) {
+  const prefersReduced =
+    typeof window !== 'undefined' &&
+    window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
-      requestAnimationFrame(() => {
-        const prefersReduced =
-          typeof window !== 'undefined' &&
-          window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  const doScroll = () => {
+    node.scrollIntoView({
+      behavior: prefersReduced ? 'auto' : 'smooth',
+      block: 'start'
+    });
+  };
 
-        const rect = node.getBoundingClientRect();
-        const scrollY = window.scrollY + rect.bottom;
-        const offset = -700; // adjust to taste
-        const target = scrollY + offset;
+  const onToggle = async () => {
+    if (!node.open) return;
+    await tick();                 // wait for DOM to update
+    requestAnimationFrame(doScroll);
+  };
 
-        window.scrollTo({
-          top: target,
-          behavior: prefersReduced ? 'auto' : 'smooth'
-        });
-      });
-    };
+  // re-scroll if images finish loading and push content down
+  const onImgLoad = () => node.open && doScroll();
+  const imgs = node.querySelectorAll('img');
 
-    node.addEventListener('toggle', onToggle);
-    return { destroy() { node.removeEventListener('toggle', onToggle); } };
-  }
+  node.addEventListener('toggle', onToggle);
+  imgs.forEach(img => img.addEventListener('load', onImgLoad));
+
+  return {
+    destroy() {
+      node.removeEventListener('toggle', onToggle);
+      imgs.forEach(img => img.removeEventListener('load', onImgLoad));
+    }
+  };
+}
+
 </script>
 
 <div class="container">
@@ -312,7 +322,7 @@ Open Library fetch (server) → persist cover URL → response → UI updates
   /* CRUD pills */
   .crud-pills { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; max-width: 900px; margin-inline: auto; }
   .crud-pills details {
-    flex: 0 0 auto; width: 100%; min-width: 0;
+    flex: 0 0 auto; width: 100%; min-width: 0; scroll-margin-top: 120px;
     border-radius: 8px; background: #121212; border: 1px solid #222; border-left: 3px solid #00bcd4; overflow: hidden;
   }
   .crud-pills summary {
