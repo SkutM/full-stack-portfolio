@@ -37,7 +37,7 @@
   @media (max-width: 640px) {
     .logo-link {
       display: inline-block;
-      margin-left: -12px;            /* tweak: -4px to -10px to taste */
+      margin-left: -18px;            /* tweak: -4px to -10px to taste */
     }
   }
 
