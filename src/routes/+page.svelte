@@ -303,19 +303,33 @@
 .edge-lines .r4 { right: 180px; opacity: 0.25; }
 
 @media (max-width: 640px) {
-  .action-buttons {
-    flex-direction: row;          /* keep them side by side */
-    justify-content: center;
-    gap: 1.5rem;                  /* reduce huge 10rem gap */
-    margin-top: 40px;
+  /* 1️⃣ Fix the name banner on small screens */
+  .name-banner {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    text-align: center;
+    margin: 70px auto 15px;
+    padding: 0 10px;
+
+    font-size: clamp(1.8rem, 9vw, 2.3rem);
+    color: #00bcd4;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.15);
+
+    white-space: normal;   /* allow wrapping if needed */
+    line-height: 1.2;
+    z-index: 1;
   }
 
-  .btn {
-    padding: 0.9rem 1.6rem;       /* shrink padding */
-    font-size: 1rem;              /* slightly smaller font */
-    flex: 1 1 auto;               /* allow them to scale evenly */
-    max-width: 150px;             /* prevent overflow on narrow screens */
-    text-align: center;
+  /* 2️⃣ Hide action buttons entirely on phones */
+  .action-buttons {
+    display: none;
+  }
+
+  /* Optional: tighten hero spacing since buttons are gone */
+  .container {
+    padding-bottom: 20px;
   }
 }
 
