@@ -46,7 +46,7 @@
         href="https://reading-tracker-ncyk15tbq-scotts-projects-69acb861.vercel.app/"
         target="_blank"
         rel="noopener"
-      >🚀 Try it out</a>
+      >🚀 Try it out (Vercel Login Required)</a>
       {#if project.links.repo}
         <a class="btn ghost" href={project.links.repo} target="_blank" rel="noopener">Repo</a>
       {/if}

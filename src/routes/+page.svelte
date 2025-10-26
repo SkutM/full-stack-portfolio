@@ -331,7 +331,7 @@
   /* Optional: tighten hero spacing since buttons are gone */
   .container {
     padding-bottom: 20px;
-    padding-top: 60px;
+    padding-top: 30px;
   }
 }
 
