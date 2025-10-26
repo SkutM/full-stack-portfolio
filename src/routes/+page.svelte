@@ -307,7 +307,7 @@
   .name-banner {
     position: relative;
     left: 0;
-    top: -20px;
+    top: -30px;
     transform: none;
     width: 100%;
     text-align: center;
@@ -331,6 +331,7 @@
   /* Optional: tighten hero spacing since buttons are gone */
   .container {
     padding-bottom: 20px;
+    padding-top: 60px;
   }
 }
 
