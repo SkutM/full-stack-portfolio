@@ -82,9 +82,7 @@
     </ul>
 
     <p class="blurb">
-      Recently: shipped a JWT-secured Reading Tracker (Vite proxy + Alembic
-      migrations) and a DeepFace/TensorFlow facial auth prototype (Flask +
-      Gunicorn).
+      Recently: Shipped & deployed Reading Tracker (SvelteKit + FastAPI + Turso) and Skut-Face facial auth prototype (Flask + TensorFlow).
     </p>
   </section>
 </div>

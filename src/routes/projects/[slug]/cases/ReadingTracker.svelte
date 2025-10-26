@@ -46,9 +46,9 @@
         href="https://reading-tracker-ncyk15tbq-scotts-projects-69acb861.vercel.app/"
         target="_blank"
         rel="noopener"
-      >🚀 Try it out (Vercel Account Required)</a>
+      >🚀 Try it out</a>
       <p class="note">
-        Note: Backend hosted on Render — it may take a few seconds to wake up on first load.
+        Note: Requires Vercel login. Backend on Render — may take a few seconds on first request.
       </p>
       {#if project.links.repo}
         <a class="btn ghost" href={project.links.repo} target="_blank" rel="noopener">Repo</a>
@@ -75,10 +75,6 @@
       The goal was to build a <strong>secure, production-grade full-stack application</strong> that enforces
       strict data isolation while handling reflective reading records efficiently. This required integrating
       <strong>SvelteKit</strong> and <strong>FastAPI</strong> and resolving cross-origin and auth concerns cleanly.
-    </p>
-    <p>
-      The solution connects both via a <strong>Vite Proxy</strong> for local DX and a
-      <strong>Svelte store</strong> to persist auth state, achieving a smooth, secure user flow.
     </p>
   </section>
 

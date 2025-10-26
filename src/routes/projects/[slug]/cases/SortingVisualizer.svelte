@@ -16,6 +16,15 @@
 
     <p class="short">{project.short}</p>
 
+    <div class="cta-row">
+      {#if project.links.repo}
+        <a class="btn ghost" href={project.links.repo} target="_blank" rel="noopener">Repo</a>
+      {/if}
+      {#if project.links.live}
+        <a class="btn ghost" href={project.links.live} target="_blank" rel="noopener">Project Live</a>
+      {/if}
+    </div>
+
     {#if project.heroImage}
     <figure class="hero-media">
         <img src={`${assets}/images/sorting-visualizer/hero_sorting.png`}
@@ -261,6 +270,34 @@
     border-radius: 8px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   }
+}
+
+.cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 10px 0 4px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.btn.ghost {
+  color: #00bcd4;
+  border-color: #1f2a33;
+  background: #0e1519;
+}
+.btn.ghost:hover {
+  border-color: #2b3a46;
+  background: #0f1920;
 }
 
   

@@ -53,7 +53,7 @@
   <section class="summary">
     <h3>Professional Summary</h3>
     <p>
-      Highly motivated <strong>Full-Stack Developer</strong> specializing in modern, dynamic application architecture
+      Highly motivated <strong>Full-Stack Developer</strong> with extensive experience in modern, dynamic application architecture
       (<strong>SvelteKit/TypeScript</strong>) and scalable Python APIs (<strong>FastAPI/SQLAlchemy</strong>).
       Proven ability to engineer secure authentication flows (<strong>JWT</strong>), resolve complex synchronization
       issues, and design systems that balance clarity, performance, and maintainability.
@@ -122,13 +122,21 @@
       <h4>1. Reading Tracker (SvelteKit / FastAPI)</h4>
       <ul>
         <li>
-          <strong>Engineered</strong> a secure, full-stack application using <strong>FastAPI</strong> and
-          <strong>SvelteKit/TypeScript</strong>, implementing token-based <strong>JWT authorization</strong> to enforce
-          strict data ownership across all CRUD operations.
+          <strong>Developed</strong> and deployed a production-ready <strong>full-stack web app</strong> using
+          <strong>SvelteKit (TypeScript)</strong> and <strong>FastAPI (Python)</strong> with
+          <strong>JWT authentication</strong> for per-user data isolation and secure CRUD operations.
         </li>
         <li>
-          <strong>Resolved critical path and synchronization errors</strong> by implementing a
-          <strong>Vite Proxy</strong> and utilizing <strong>Alembic</strong> migrations for stable development.
+          <strong>Integrated</strong> <strong>Turso (LibSQL)</strong> as a persistent cloud database and configured
+          <strong>Render</strong> (backend) with <strong>Vercel</strong> (frontend) for seamless, cross-service deployment.
+        </li>
+        <li>
+          <strong>Resolved critical CORS, pathing, and synchronization issues</strong> by introducing a
+          <strong>Vite Proxy</strong>, typed API client, and environment-specific Alembic migrations.
+        </li>
+        <li>
+          Implemented safe partial updates using <strong>Pydantic</strong> and <strong>SQLAlchemy</strong>
+          (<code>exclude_unset=True</code>) and added server-side <strong>Open Library</strong> cover fetching.
         </li>
       </ul>
       <a href={`${base}/projects/reading-tracker`}>View Detail Page →</a>
@@ -177,6 +185,11 @@
 </div>
 
 <style>
+
+  section {
+  margin-top: 2.2em;  /* increase space between sections */
+}
+
   :root {
     /* Pure white + black body, with subtle contrast for name/links */
     --bg: #ffffff;
@@ -236,4 +249,28 @@
     .theme-toggle { display: none; }
     .resume-container { box-shadow: none; }
   }
+
+  /* Keep the compact spacing in the skills section */
+.skills ul li {
+  margin-bottom: 0; /* or a tiny 0.2em if you want minimal space */
+  line-height: 1.4;
+}
+
+/* Add more spacing for bullets in later sections */
+.experience ul li,
+.projects ul li {
+  margin-bottom: 0.6em; /* adds comfortable visual separation */
+  line-height: 1.6;
+}
+
+.summary h3 {
+  margin-bottom: 0.6em; /* space between the heading and paragraph */
+}
+
+.summary p {
+  line-height: 1.7;     /* easier to read */
+  margin-bottom: 1em;   /* adds slight separation below */
+}
+
+
 </style>
