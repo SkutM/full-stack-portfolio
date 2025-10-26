@@ -209,7 +209,7 @@
     position: absolute;
     top: 12px;
     right: 12px;
-    z-index: 10;                     /* ✅ make sure it sits above */
+    z-index: 0;                     /* ✅ make sure it sits above */
     border: 1px solid var(--link);
     background: transparent;
     color: var(--link);

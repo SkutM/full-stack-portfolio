@@ -108,13 +108,13 @@
 
 <style>
 
-  /* Typed name banner */
   .name-banner {
-    position: fixed;
-    top: 125px;
+    position: relative;              /* so it scrolls normally */
+    top: 0;                          /* reset fixed offset */
     left: 50%;
     transform: translateX(-50%);
-    margin: 0;
+    text-align: center;
+    margin-top: 63px;               /* same vertical spacing as before */
     padding: 0 12px;
     font-size: clamp(2.2rem, 6vw, 3.5rem);
     font-family: inherit;
@@ -122,7 +122,7 @@
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
     white-space: nowrap;
     pointer-events: none;
-    z-index: 10;
+    z-index: 1;                      /* lower, so nav can cover it */
   }
 
   .cursor {
@@ -145,7 +145,7 @@
   .container {
     width: min(1100px, 92vw);
     margin: 0 auto;
-    padding: 180px 0 40px;
+    padding: 15px 0 40px;
   }
 
   /* Hero */
@@ -302,7 +302,22 @@
 .edge-lines .r3 { right: 120px; opacity: 0.35; }
 .edge-lines .r4 { right: 180px; opacity: 0.25; }
 
+@media (max-width: 640px) {
+  .action-buttons {
+    flex-direction: row;          /* keep them side by side */
+    justify-content: center;
+    gap: 1.5rem;                  /* reduce huge 10rem gap */
+    margin-top: 40px;
+  }
 
+  .btn {
+    padding: 0.9rem 1.6rem;       /* shrink padding */
+    font-size: 1rem;              /* slightly smaller font */
+    flex: 1 1 auto;               /* allow them to scale evenly */
+    max-width: 150px;             /* prevent overflow on narrow screens */
+    text-align: center;
+  }
+}
 
 
 </style>

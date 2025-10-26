@@ -1,429 +1,322 @@
 <script lang="ts">
-    import type { Project } from '$lib/projects/data';
-    export let project: Project;
-    import { base, assets } from '$app/paths';
+  import type { Project } from '$lib/projects/data';
+  export let project: Project;
+  import { base, assets } from '$app/paths';
 
-        // smooth-scroll the opened <details> into view
-    function scrollOnOpen(node: HTMLDetailsElement) {
-      const onToggle = () => {
-        if (!node.open) return;
+  // smooth-scroll the opened <details> into view
+  function scrollOnOpen(node: HTMLDetailsElement) {
+    const onToggle = () => {
+      if (!node.open) return;
 
-        requestAnimationFrame(() => {
-          const prefersReduced =
-            typeof window !== 'undefined' &&
-            window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      requestAnimationFrame(() => {
+        const prefersReduced =
+          typeof window !== 'undefined' &&
+          window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
-          const rect = node.getBoundingClientRect();
-          const scrollY = window.scrollY + rect.bottom; // base position
-          const offset = -700; // pixels extra down the page (increase if you want lower)
-          const target = scrollY + offset;
+        const rect = node.getBoundingClientRect();
+        const scrollY = window.scrollY + rect.bottom;
+        const offset = -700; // adjust to taste
+        const target = scrollY + offset;
 
-          window.scrollTo({
-            top: target,
-            behavior: prefersReduced ? 'auto' : 'smooth'
-          });
+        window.scrollTo({
+          top: target,
+          behavior: prefersReduced ? 'auto' : 'smooth'
         });
-      };
+      });
+    };
 
-      node.addEventListener('toggle', onToggle);
-      return { destroy() { node.removeEventListener('toggle', onToggle); } };
-    }
-
-
+    node.addEventListener('toggle', onToggle);
+    return { destroy() { node.removeEventListener('toggle', onToggle); } };
+  }
 </script>
 
 <div class="container">
   <!-- Hero -->
-    <article class="case card">
+  <article class="case card">
     <header class="case-head">
-        <h1>{project.title}</h1>
-        <p class="stack">{project.stack.join(" · ")}</p>
+      <h1>{project.title}</h1>
+      <p class="stack">{project.stack.join(' · ')}</p>
     </header>
 
     <p class="short">{project.short}</p>
 
-    <figure class="hero-media">
-        <img src={`${assets}/images/reading-tracker/reading_tracker.png`}
-            alt="Reading Tracker"
-            loading="lazy" />
-        <figcaption>Reading Tracker Display</figcaption>
-    </figure>
-    </article>
+    <div class="cta-row">
+      <a
+        class="btn primary"
+        href="https://reading-tracker-ncyk15tbq-scotts-projects-69acb861.vercel.app/"
+        target="_blank"
+        rel="noopener"
+      >🚀 Try it out</a>
+      {#if project.links.repo}
+        <a class="btn ghost" href={project.links.repo} target="_blank" rel="noopener">Repo</a>
+      {/if}
+      {#if project.links.live}
+        <a class="btn ghost" href={project.links.live} target="_blank" rel="noopener">Project Live</a>
+      {/if}
+    </div>
 
-    <!-- Problem & Solution -->
-    <section class="card section">
+    <figure class="hero-media">
+      <img
+        src={`${assets}/images/reading-tracker/reading_tracker.png`}
+        alt="Reading Tracker"
+        loading="lazy"
+      />
+      <figcaption>Reading Tracker Display</figcaption>
+    </figure>
+  </article>
+
+  <!-- Problem & Goal -->
+  <section class="card section">
     <h2>Problem & Goal</h2>
     <p>
-        The goal was to build a <strong>secure, production-grade full-stack application</strong> that enforces
-        strict data isolation while handling reflective reading records efficiently. This required integrating
-        two distinct technology stacks — <strong>SvelteKit</strong> and <strong>FastAPI</strong> — and resolving
-        critical communication issues between them.
+      The goal was to build a <strong>secure, production-grade full-stack application</strong> that enforces
+      strict data isolation while handling reflective reading records efficiently. This required integrating
+      <strong>SvelteKit</strong> and <strong>FastAPI</strong> and resolving cross-origin and auth concerns cleanly.
     </p>
     <p>
-        The solution connects both via a <strong>Vite Proxy</strong> for seamless development and a
-        <strong>Svelte store</strong> to persist authentication state, achieving a smooth, secure user flow.
+      The solution connects both via a <strong>Vite Proxy</strong> for local DX and a
+      <strong>Svelte store</strong> to persist auth state, achieving a smooth, secure user flow.
     </p>
-    </section>
+  </section>
 
-    <!-- Solution -->
-    <section class="card section">
+  <!-- Solution -->
+  <section class="card section">
     <h2>Solution</h2>
     <ul class="bullets">
-        <li>
-        <strong>Secure full-stack auth:</strong> SvelteKit frontend + FastAPI backend with JWT
-        (access/refresh) to enforce <em>per-user data ownership</em>.
-        </li>
-        <li>
-        <strong>Reliable cross-service comms:</strong> Vite proxy for development to bypass CORS and
-        absolute-path fixes in <strong>Alembic</strong> migrations for consistent DB mapping across environments.
-        </li>
-        <li>
-        <strong>Safe partial updates:</strong> <strong>Pydantic</strong> + <strong>SQLAlchemy</strong> with
-        <code>exclude_unset=True</code> prevents overwriting unspecified fields during PATCH/PUT.
-        </li>
-        <li>
-        <strong>Centralized external API:</strong> Backend service fetches Open Library covers and persists
-        normalized data, keeping API keys and logic off the client.
-        </li>
-        <li>
-        <strong>Polished UX:</strong> Svelte store persists auth state; a 3D CSS card-flip reveals private
-        reflections; prefetch keeps common actions snappy.
-        </li>
+      <li><strong>Secure full-stack auth:</strong> SvelteKit frontend + FastAPI backend with JWT (access/refresh) to enforce <em>per-user data ownership</em>.</li>
+      <li><strong>Reliable cross-service comms:</strong> Vite proxy in dev; explicit CORS in prod; consistent <code>Bearer</code> headers from a single API client.</li>
+      <li><strong>Safe partial updates:</strong> <strong>Pydantic</strong> + <strong>SQLAlchemy</strong> with <code>exclude_unset=True</code> to prevent accidental overwrites.</li>
+      <li><strong>Server-only integrations:</strong> Backend fetches Open Library covers and persists normalized data to keep the client clean and secret-free.</li>
+      <li><strong>Polished UX:</strong> Svelte store persists auth; a 3D CSS card-flip reveals private reflections; compact UI with clear states and inline errors.</li>
     </ul>
 
-    </section>
-        <figure class="gallery">
-        <img src={`${assets}/images/reading-tracker/readingtracker_gif.gif`}
-            alt="Reading Tracker gif"
-            loading="lazy" />
-        <figcaption>Reading Tracker Register/Login & CRUD</figcaption>
-    </figure>
+    <!-- Recent updates blurb -->
+    <div class="updates">
+      <strong>Recent updates:</strong> fully deployed and working — <em>Vercel</em> (SvelteKit frontend) +
+      <em>Render</em> (FastAPI backend) + <em>Turso</em> (LibSQL) for persistent storage, with refined CORS,
+      auth flows, and a hardened API client.
+    </div>
+  </section>
 
-    <!-- Architecture -->
-    <section class="card section">
+  <figure class="gallery">
+    <img
+      src={`${assets}/images/reading-tracker/readingtracker_gif.gif`}
+      alt="Reading Tracker gif"
+      loading="lazy"
+    />
+    <figcaption>Reading Tracker Register/Login & CRUD</figcaption>
+  </figure>
+
+  <!-- Architecture -->
+  <section class="card section">
     <h2>Architecture</h2>
 
-    <!-- High-level system view -->
     <div class="cols">
-        <div>
+      <div>
         <h3>System Overview</h3>
         <ul class="bullets">
-            <li><strong>SvelteKit ↔ FastAPI</strong> pairing: SvelteKit handles routes/UI and state; FastAPI exposes REST for auth/CRUD.</li>
-            <li><strong>Vite Proxy</strong> in dev: forwards <code>/api</code> requests to FastAPI to bypass CORS and keep DX smooth.</li>
-            <li><strong>JWT Auth</strong> end-to-end: access/refresh tokens with guarded routes and per-user data isolation.</li>
-            <li><strong>Alembic</strong> migrations keep schema changes consistent across environments.</li>
+          <li><strong>SvelteKit ↔ FastAPI</strong>: SvelteKit handles routes/UI/state; FastAPI exposes REST for auth/CRUD.</li>
+          <li><strong>Vite Proxy</strong> (dev): forwards <code>/api</code> to FastAPI to bypass CORS locally.</li>
+          <li><strong>JWT Auth</strong>: access/refresh tokens; protected routes; per-user data isolation.</li>
+          <li><strong>Alembic</strong> keeps schema changes consistent across environments.</li>
         </ul>
-        </div>
+      </div>
 
-        <div>
+      <div>
         <h3>Data & Auth Pipeline</h3>
         <ul class="bullets">
-            <li><strong>Login/Register</strong> → server verifies credentials/embeddings → issues JWT pair.</li>
-            <li><strong>Auth store</strong> persists token; all CRUD requests include bearer token automatically.</li>
-            <li><strong>Pydantic + SQLAlchemy</strong> models; safe partial updates via <code>exclude_unset=True</code>.</li>
-            <li><strong>Open Library API</strong> used server-side to fetch/attach cover images during book creation.</li>
+          <li><strong>Login/Register</strong> → server verifies → issues JWT pair.</li>
+          <li><strong>authStore</strong> persists token; API client auto-attaches <code>Authorization</code>.</li>
+          <li><strong>Pydantic + SQLAlchemy</strong> models; safe partial updates via <code>exclude_unset=True</code>.</li>
+          <li><strong>Open Library API</strong> (server-side) to attach cover images during book creation.</li>
         </ul>
-        </div>
+      </div>
     </div>
 
-    <!-- Modules: Backend vs Frontend -->
     <div class="cols" style="margin-top:12px;">
-        <div>
+      <div>
         <h3>Backend (FastAPI)</h3>
         <ul class="bullets">
-            <li><strong><code>main.py</code></strong> — App factory, CORS, routers, and /books CRUD (create/list/read/update/delete) behind auth.</li>
-            <li><strong><code>auth_routes.py</code></strong> — <code>/auth/register</code>, <code>/auth/login</code>, and profile endpoints; issues/validates JWT.</li>
-            <li><strong><code>jwt_utils.py</code></strong> — create/decode tokens; <code>get_current_user</code> dependency for protecting routes.</li>
-            <li><strong><code>auth_models.py</code></strong> / <strong><code>models.py</code></strong> — SQLAlchemy models for <code>User</code> and <code>Book</code>.</li>
-            <li><strong><code>auth_schemas.py</code></strong> / <strong><code>schemas.py</code></strong> — Pydantic DTOs (requests/responses), <code>from_attributes</code> for ORM.</li>
-            <li><strong><code>database.py</code></strong> — engine/session (<code>SessionLocal</code>), shared <code>Base</code>, dependency <code>get_db</code>.</li>
-            <li><strong><code>config.py</code></strong> — settings (secrets, JWT algorithm/expirations, DB path); <strong><code>env.py</code></strong> — Generates Alembic migration scripts for database table creation and schema updates.</li>
+          <li><code>main.py</code> — App factory, CORS, routers, <code>/books</code> CRUD (auth-protected).</li>
+          <li><code>auth_routes.py</code> — <code>/auth/register</code>, <code>/auth/login</code>, profile endpoints; issues/validates JWT.</li>
+          <li><code>jwt_utils.py</code> — create/decode tokens; <code>get_current_user</code> dependency.</li>
+          <li><code>auth_models.py</code> / <code>models.py</code> — SQLAlchemy models for <code>User</code> and <code>Book</code>.</li>
+          <li><code>auth_schemas.py</code> / <code>schemas.py</code> — Pydantic DTOs with <code>from_attributes</code>.</li>
+          <li><code>database.py</code> — engine/session, shared <code>Base</code>, dependency <code>get_db</code> (LibSQL via Turso in prod; SQLite fallback locally).</li>
+          <li><code>config.py</code> — settings (secrets, JWT algorithm/expirations, DB URL).</li>
         </ul>
-        </div>
+      </div>
 
-        <div>
+      <div>
         <h3>Frontend (SvelteKit)</h3>
         <ul class="bullets">
-            <li><strong><code>+layout.svelte</code></strong> — App shell (header/nav), dark theme, consistent page frame.</li>
-            <li><strong><code>+page.svelte</code></strong> — Landing/CTA with prefetch for seamless route changes.</li>
-            <li><strong><code>authStore.ts</code></strong> — Central store for token + user; <code>login()</code>/<code>logout()</code>; persists across reloads.</li>
-            <li><strong><code>types.ts</code></strong> — Shared DTO/types (e.g., <code>User</code>, <code>Book</code>, <code>LoginResponse</code>) for type-safe components.</li>
-            <li><strong><code>LoginForm.svelte</code></strong> / <strong><code>RegisterForm.svelte</code></strong> — Auth flows with inline validation and error display.</li>
-            <li><strong><code>BookManager.svelte</code></strong> — Authorized CRUD UI: list/filter/create/edit/delete with cover-fetch status feedback.</li>
+          <li><code>authStore.ts</code> — Central store for token + user (<code>login()</code>/<code>logout()</code>), persists across reloads.</li>
+          <li><code>api.ts</code> — Typed API client: merged headers, safe JSON parse, consistent <code>Bearer</code>.</li>
+          <li><code>LoginForm.svelte</code> / <code>RegisterForm.svelte</code> — Auth flows with inline validation & errors.</li>
+          <li><code>BookManager.svelte</code> — Authorized CRUD UI: create/edit/delete, cover-fetch, optimistic UI.</li>
+          <li><code>types.ts</code> — Shared DTOs (<code>User</code>, <code>Book</code>, <code>LoginResponse</code>).</li>
         </ul>
-        </div>
-    </div>
-
-    <!-- Optional: request flow diagram -->
-    <div style="margin-top:12px;">
-        <h3>Request Flow</h3>
-        <pre style="white-space:pre-wrap; margin:0; color:#b0b0b0;">
-    Client → <strong>Login/Register</strong> → FastAPI (<strong>JWT</strong>) → <strong>authStore</strong> saves token
-    Client (Bearer) → <strong>/books</strong> CRUD → FastAPI (Pydantic/SQLAlchemy, <code>exclude_unset=True</code>)
-    Open Library fetch (server) → persist cover URL → response → UI updates
-        </pre>
-    </div>
-    </section>
-
-    <!-- === DEMO (CRUD) === -->
-    <section class="card section">
-      <h2>Demo — Full CRUD</h2>
-
-      <div class="crud-pills">
-        <details use:scrollOnOpen>
-          <summary>Create — Register/Add Book</summary>
-          <figure class="gallery">
-            <img
-              src={`${assets}/images/reading-tracker/C.gif`}
-              alt="Create a new book entry"
-              loading="lazy"
-            />
-            <figcaption><strong>Create</strong> — Add a new book (title, author, review, recommendation).</figcaption>
-          </figure>
-        </details>
-
-        <details use:scrollOnOpen>
-          <summary>Read — Browse / Filter</summary>
-          <figure class="gallery">
-            <img
-              src={`${assets}/images/reading-tracker/R.gif`}
-              alt="Read — list and filter books"
-              loading="lazy"
-            />
-            <figcaption><strong>Read</strong> — Browse your library.</figcaption>
-          </figure>
-        </details>
-
-        <details use:scrollOnOpen>
-          <summary>Update — Edit Review/Notes</summary>
-          <figure class="gallery">
-            <img
-              src={`${assets}/images/reading-tracker/U.gif`}
-              alt="Update book progress and notes"
-              loading="lazy"
-            />
-            <figcaption><strong>Update</strong> — Edit reviews, recommendations, and notes.</figcaption>
-          </figure>
-        </details>
-
-        <details use:scrollOnOpen>
-          <summary>Delete — Remove Entry</summary>
-          <figure class="gallery">
-            <img
-              src={`${assets}/images/reading-tracker/D.gif`}
-              alt="Delete a book entry"
-              loading="lazy"
-            />
-            <figcaption><strong>Delete</strong> — Remove an entry (with confirmation).</figcaption>
-          </figure>
-        </details>
       </div>
-    </section>
+    </div>
 
+    <div style="margin-top:12px;">
+      <h3>Request Flow</h3>
+      <pre style="white-space:pre-wrap; margin:0; color:#b0b0b0;">
+Client → <strong>Login/Register</strong> → FastAPI (<strong>JWT</strong>) → <strong>authStore</strong> saves token
+Client (Bearer) → <strong>/books</strong> CRUD → FastAPI (Pydantic/SQLAlchemy, <code>exclude_unset=True</code>)
+Open Library fetch (server) → persist cover URL → response → UI updates
+      </pre>
+    </div>
+  </section>
+
+  <!-- Demo — CRUD -->
+  <section class="card section">
+    <h2>Demo — Full CRUD</h2>
+
+    <div class="crud-pills">
+      <details use:scrollOnOpen>
+        <summary>Create — Register/Add Book</summary>
+        <figure class="gallery">
+          <img
+            src={`${assets}/images/reading-tracker/C.gif`}
+            alt="Create a new book entry"
+            loading="lazy"
+          />
+          <figcaption><strong>Create</strong> — Add a new book (title, author, review, recommendation).</figcaption>
+        </figure>
+      </details>
+
+      <details use:scrollOnOpen>
+        <summary>Read — Browse / Filter</summary>
+        <figure class="gallery">
+          <img
+            src={`${assets}/images/reading-tracker/R.gif`}
+            alt="Read — list and filter books"
+            loading="lazy"
+          />
+          <figcaption><strong>Read</strong> — Browse your library.</figcaption>
+        </figure>
+      </details>
+
+      <details use:scrollOnOpen>
+        <summary>Update — Edit Review/Notes</summary>
+        <figure class="gallery">
+          <img
+            src={`${assets}/images/reading-tracker/U.gif`}
+            alt="Update book progress and notes"
+            loading="lazy"
+          />
+          <figcaption><strong>Update</strong> — Edit reviews, recommendations, and notes.</figcaption>
+        </figure>
+      </details>
+
+      <details use:scrollOnOpen>
+        <summary>Delete — Remove Entry</summary>
+        <figure class="gallery">
+          <img
+            src={`${assets}/images/reading-tracker/D.gif`}
+            alt="Delete a book entry"
+            loading="lazy"
+          />
+          <figcaption><strong>Delete</strong> — Remove an entry (with confirmation).</figcaption>
+        </figure>
+      </details>
+    </div>
+  </section>
 
   <!-- Links -->
-    <section class="links">
+  <section class="links">
     <a href="{base}/projects">← Back to Projects</a>
     {#if project.links.repo}
-        <a href={project.links.repo} target="_blank" rel="noopener">Repo →</a>
+      <a href={project.links.repo} target="_blank" rel="noopener">Repo →</a>
     {/if}
     {#if project.links.live}
-        <a href={project.links.live} target="_blank" rel="noopener">Live →</a>
+      <a href={project.links.live} target="_blank" rel="noopener">Live →</a>
     {/if}
-    </section>
+    <a
+      href="https://reading-tracker-ncyk15tbq-scotts-projects-69acb861.vercel.app/"
+      target="_blank"
+      rel="noopener"
+    >Reading Tracker (Live) →</a>
+  </section>
 </div>
 
 <style>
-/* === GALLERY === */
-.hero-media {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  .container { width: min(1100px, 92vw); margin: 0 auto; padding: 24px 0 40px; }
 
-.hero-media img {
-  display: block;
-  max-width: 75%;
-  height: auto;
-  border-radius: 10px;
-}
-
-.hero-media figcaption {
-  text-align: center;
-  font-size: 0.95rem;
-  color: #8b949e;
-  margin-top: 0.5rem;
-}
-.gallery {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px auto;
-  max-width: 900px;
-}
-.gallery img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 10px;
-  border: 1px solid #222;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  object-fit: contain;
-}
-.gallery figcaption {
-  color: #8b949e;
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
-  text-align: center;
-}
-
-/* === TWO-COLUMN GRID === */
-.cols {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
-@media (min-width: 800px) {
-  .cols {
-    grid-template-columns: 1fr 1fr;
+  .card {
+    background: #151515;
+    border: 1px solid #222;
+    border-left: 3px solid #00bcd4;
+    border-radius: 10px;
+    padding: 18px 20px;
   }
-}
+  .case { margin-bottom: 16px; }
+  .case-head h1 { margin: 0 0 6px; font-size: clamp(1.9rem, 3.5vw, 2.6rem); color: #e6edf3; }
+  .stack { color: #8b949e; margin: 0; }
+  .short { color: #b0b0b0; margin: .5rem 0 1rem; line-height: 1.6; }
 
-/* === CRUD DEMO GRID === */
-.demo-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  margin-top: 10px;
-}
-@media (min-width: 800px) {
-  .demo-grid {
-    grid-template-columns: 1fr 1fr;
+  /* CTA */
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 10px 0 4px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 14px; border-radius: 8px;
+    text-decoration: none; font-weight: 600; border: 1px solid transparent;
   }
-}
-.demo-grid figure {
-  margin: 0;
-}
-.demo-grid img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 10px;
-  border: 1px solid #222;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  object-fit: contain;
-}
-.demo-grid figcaption {
-  color: #8b949e;
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
-  text-align: center;
-}
+  .btn.primary { background: #00bcd4; color: #0b0f14; border-color: #00a3b7; }
+  .btn.primary:hover { background: #10c5dc; }
+  .btn.ghost { color: #00bcd4; border-color: #1f2a33; background: #0e1519; }
+  .btn.ghost:hover { border-color: #2b3a46; background: #0f1920; }
 
-    .container { width: min(1100px, 92vw); margin: 0 auto; padding: 24px 0 40px; }
+  /* Hero */
+  .hero-media { display: flex; flex-direction: column; align-items: center; margin: 10px 0 0; }
+  .hero-media img { width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid #222; }
+  .hero-media figcaption { color: #8b949e; font-size: .9rem; margin-top: .4rem; text-align: center; }
 
-    .card {
-    background:#151515;
-    border:1px solid #222;
-    border-left:3px solid #00bcd4;
-    border-radius:10px;
-    padding:18px 20px;
-    }
+  .section { margin-top: 14px; }
+  .section h2 { margin: 0 0 8px; font-size: 1.25rem; color: #e6edf3; }
 
-    .case { margin-bottom: 16px; }
-    .case-head h1 { margin:0 0 6px; font-size: clamp(1.9rem, 3.5vw, 2.6rem); color:#e6edf3; }
-    .stack { color:#8b949e; margin:0; }
-    .short { color:#b0b0b0; margin:.5rem 0 1rem; line-height:1.6; }
-
-    .hero-media { margin: 10px 0 0; }
-    .hero-media img { width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid #222; }
-    .hero-media figcaption { color: #8b949e; font-size: .9rem; margin-top: .4rem; }
-
-    .section { margin-top: 14px; }
-    .section h2 { margin: 0 0 8px; font-size: 1.25rem; color: #e6edf3; }
-
-    .bullets { margin: 0; padding-left: 1.1rem; }
-    .bullets li { color:#b0b0b0; margin-bottom:.5rem; line-height:1.55; }
-
-    .links { display: flex; gap: 1.5rem; margin-top: 16px; flex-wrap: wrap; }
-    .links a { color:#00bcd4; text-decoration:none; font-weight:600; }
-    .links a:hover { text-decoration: underline; }
-
-    /* --- CRUD pills (click-to-reveal) --- */
-.crud-pills {
-  display: flex;
-  flex-direction: column;   /* stack vertically */
-  gap: 12px;
-  margin-top: 8px;
-  max-width: 900px;         /* optional: keep content narrow */
-  margin-inline: auto;      /* optional: center the column */
-}
-
-@media (min-width: 800px) {
-  .crud-pills {
-    flex-direction: column; /* stay as a column on wide screens too */
-    flex-wrap: nowrap;
+  /* Updates blurb */
+  .updates {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #10171b;
+    border: 1px solid #22323c;
+    color: #b7c4cc;
   }
-}
 
-/* Each expandable card */
-.crud-pills details {
-  flex: 0 0 auto;
-  width: 100%;
-  min-width: 0;             /* ignore previous min-width */
-  border-radius: 8px;
-  background: #121212;
-  border: 1px solid #222;
-  border-left: 3px solid #00bcd4;
-  overflow: hidden;
-}
+  .bullets { margin: 0; padding-left: 1.1rem; }
+  .bullets li { color: #b0b0b0; margin-bottom: .5rem; line-height: 1.55; }
 
-/* Summary “tab” */
-.crud-pills summary {
-  cursor: pointer;
-  list-style: none;             /* remove default marker in most browsers */
-  padding: 10px 14px;
-  color: #e6edf3;
-  font-weight: 600;
-  user-select: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #151515;
-  border-radius: 8px 8px 0 0;   /* only top corners rounded */
-  transition: background 0.2s ease;
-}
+  .cols { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  @media (min-width: 800px) { .cols { grid-template-columns: 1fr 1fr; } }
 
-/* caret */
-.crud-pills summary::before {
-  content: "▸";
-  opacity: 0.7;
-  transform: translateY(1px);
-}
-.crud-pills details[open] summary::before {
-  content: "▾";
-}
+  /* Gallery (shared) */
+  .gallery { display: flex; flex-direction: column; align-items: center; margin: 20px auto; max-width: 900px; }
+  .gallery img {
+    width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid #222;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); object-fit: contain;
+  }
+  .gallery figcaption { color: #8b949e; font-size: 0.9rem; margin-top: 0.5rem; text-align: center; }
 
-.crud-pills summary:hover {
-  background: #0f0f0f;
-}
+  /* CRUD pills */
+  .crud-pills { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; max-width: 900px; margin-inline: auto; }
+  .crud-pills details {
+    flex: 0 0 auto; width: 100%; min-width: 0;
+    border-radius: 8px; background: #121212; border: 1px solid #222; border-left: 3px solid #00bcd4; overflow: hidden;
+  }
+  .crud-pills summary {
+    cursor: pointer; list-style: none; padding: 10px 14px; color: #e6edf3; font-weight: 600; user-select: none;
+    display: flex; align-items: center; gap: 8px; background: #151515; border-radius: 8px 8px 0 0; transition: background .2s ease;
+  }
+  .crud-pills summary::before { content: '▸'; opacity: .7; transform: translateY(1px); }
+  .crud-pills details[open] summary::before { content: '▾'; }
+  .crud-pills summary:hover { background: #0f0f0f; }
+  .crud-pills details > .gallery { padding: 12px 14px 16px; background: #151515; border-top: 1px solid #222; }
 
-/* Content area inside the expandable card */
-.crud-pills details > .gallery {
-  padding: 12px 14px 16px;
-  background: #151515;
-  border-top: 1px solid #222;
-}
-
-/* Reuse your gallery image style; add here in case this section is isolated */
-.crud-pills details > .gallery img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 10px;
-  border: 1px solid #222;
-  box-shadow: 0 4px 12px rgba(0,0,0,.25);
-  object-fit: contain;
-}
-
+  /* Links */
+  .links { display: flex; gap: 1.5rem; margin-top: 16px; flex-wrap: wrap; }
+  .links a { color: #00bcd4; text-decoration: none; font-weight: 600; }
+  .links a:hover { text-decoration: underline; }
 </style>
