@@ -307,7 +307,7 @@
   .name-banner {
     position: relative;
     left: 0;
-    top: -30px;
+    top: -20px;
     transform: none;
     width: 100%;
     text-align: center;
