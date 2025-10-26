@@ -314,7 +314,7 @@
     margin: 70px auto 15px;
     padding: 0 10px;
 
-    font-size: clamp(1.8rem, 9vw, 2.3rem);
+    font-size: clamp(2.1rem, 10vw, 2.8rem);
     color: #00bcd4;
     text-shadow: 0 0 6px rgba(255, 255, 255, 0.15);
 
