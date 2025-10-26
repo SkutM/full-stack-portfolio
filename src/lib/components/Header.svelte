@@ -1,6 +1,5 @@
 <script>
   import { base } from '$app/paths';
-  import { page } from '$app/stores';
 </script>
 
 <header class="header">
@@ -9,24 +8,9 @@
   </div>
 
   <nav>
-    <a
-      href={`${base}/`}
-      class="nav-link"
-      class:active={$page.url.pathname === '/'}
-      >Home</a
-    >
-    <a
-      href={`${base}/projects`}
-      class="nav-link"
-      class:active={$page.url.pathname.startsWith('/projects')}
-      >Projects</a
-    >
-    <a
-      href={`${base}/resume`}
-      class="nav-link"
-      class:active={$page.url.pathname.startsWith('/resume')}
-      >Résumé</a
-    >
+    <a href="{base}/" class="nav-link">Home</a>
+    <a href="{base}/projects" class="nav-link">Projects</a>
+    <a href="{base}/resume" class="nav-link">Résumé</a>
   </nav>
 </header>
 
@@ -70,10 +54,6 @@
   }
 
   .nav-link:hover {
-    color: #ffffff;
-    border-bottom: 2px solid #00bcd4;
-  }
-  .nav-link.active {
     color: #ffffff;
     border-bottom: 2px solid #00bcd4;
   }
