@@ -54,7 +54,7 @@
     <h3>Professional Summary</h3>
     <p>
       Highly motivated <strong>Full-Stack Developer</strong> with extensive experience in modern, dynamic application architecture
-      (<strong>SvelteKit/TypeScript</strong>) and scalable Python APIs (<strong>FastAPI/SQLAlchemy</strong>).
+      (<strong>SvelteKit/TypeScript</strong>) and scalable backend APIs (<strong>FastAPI/SQLAlchemy</strong> in Python).
       Proven ability to engineer secure authentication flows (<strong>JWT</strong>), resolve complex synchronization
       issues, and design systems that balance clarity, performance, and maintainability.
     </p>
@@ -66,37 +66,38 @@
       <div>
         <h4>Frontend & Frameworks</h4>
         <ul>
-          <li><strong>Svelte / SvelteKit</strong></li>
-          <li>TypeScript / JavaScript (ES6+)</li>
+          <li><strong>Svelte / SvelteKit</strong> (TypeScript)</li>
+          <li>Vite Proxy (Local API Routing)</li>
           <li>HTML5 / CSS3 / SCSS</li>
         </ul>
       </div>
       <div>
         <h4>Backend & API</h4>
         <ul>
-          <li><strong>FastAPI</strong> (REST APIs)</li>
-          <li><strong>Python</strong> / Flask</li>
-          <li>JWT / Passlib (Security)</li>
+          <li><strong>Python</strong> (FastAPI / Flask)</li>
+          <li>JWT Auth / Passlib (Security)</li>
+          <li>Alembic (Schema Migrations)</li>
         </ul>
       </div>
       <div>
         <h4>Database & Tools</h4>
         <ul>
-          <li><strong>SQLAlchemy (ORM)</strong> / <strong>Alembic</strong></li>
-          <li>SQLite / PostgreSQL</li>
-          <li>Pydantic / Git / GitHub</li>
+          <li><strong>Turso (LibSQL)</strong> / SQLite / PostgreSQL</li>
+          <li><strong>SQLAlchemy (ORM)</strong> / Pydantic (Validation)</li>
+          <li>Git / GitHub / Render / Vercel (Deployment)</li>
         </ul>
       </div>
       <div>
         <h4>CS Fundamentals & ML</h4>
         <ul>
-          <li>C/C++ / x86 assembly</li>
+          <li>C / C++ / x86 Assembly</li>
           <li>Data Structures & Algorithms</li>
           <li><strong>TensorFlow / DeepFace</strong> (ML Integration)</li>
         </ul>
       </div>
     </div>
   </section>
+
 
   <section class="experience">
     <h3>Relevant Experience</h3>
