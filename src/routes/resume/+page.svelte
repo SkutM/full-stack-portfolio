@@ -123,7 +123,7 @@
       <h4>1. Reading Tracker (SvelteKit / FastAPI)</h4>
       <ul>
         <li>
-          <strong>Developed</strong> and deployed a production-ready <strong>full-stack web app</strong> using
+          <strong>Developed</strong> and <strong>deployed</strong> a production-ready <strong>full-stack web app</strong> using
           <strong>SvelteKit (TypeScript)</strong> and <strong>FastAPI (Python)</strong> with
           <strong>JWT authentication</strong> for per-user data isolation and secure CRUD operations.
         </li>
@@ -147,7 +147,7 @@
       <h4>2. Skut-Face (Facial Recognition Authentication)</h4>
       <ul>
         <li>
-          Developed a specialized full-stack authentication system using <strong>Flask</strong> and the
+          Developed a <strong>full-stack authentication system</strong> using <strong>Flask</strong> and the
           <strong>DeepFace</strong> library to enable user login via facial biometric data.
         </li>
         <li>
@@ -272,6 +272,8 @@
   line-height: 1.7;     /* easier to read */
   margin-bottom: 1em;   /* adds slight separation below */
 }
+
+
 
 
 </style>
