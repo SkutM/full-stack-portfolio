@@ -35,26 +35,23 @@
   }
 
   @media (max-width: 640px) {
+    header {
+      padding: 12px 20px;
+      justify-content: space-between;
+    }
+
     .logo-link {
-      display: inline-block;
-      margin-left: -18px;            /* tweak: -4px to -10px to taste */
+      margin-left: 0;
+      font-size: 1.25em;
+    }
+
+    nav {
+      gap: 14px;
+    }
+
+    .nav-link {
+      font-size: 0.9em;
     }
   }
 
-  nav {
-    display: flex;
-    gap: 25px;
-  }
-
-  .nav-link {
-    text-decoration: none;
-    color: #b0b0b0;
-    font-weight: 500;
-    transition: color 0.2s, border-bottom 0.2s;
-  }
-
-  .nav-link:hover {
-    color: #ffffff;
-    border-bottom: 2px solid #00bcd4;
-  }
 </style>
