@@ -105,7 +105,7 @@
       <p>Registration and login screens, verification states, and success flows:</p>
       <div class="gallery">
         {#each project.gallery as img}
-          <img src={img} alt="Skut-Face screenshot" loading="lazy" />
+          <img src={img} alt="SkutFace screenshot" loading="lazy" />
         {/each}
       </div>
     </section>

@@ -33,7 +33,7 @@ export const projects: Project[] = [
   },
   {
     slug: "skut-face",
-    title: "Skut-Face — Facial Recognition Auth (Flask + DeepFace)",
+    title: "SkutFace — Facial Recognition Auth (Flask + DeepFace)",
     short: "Facial-recognition login using DeepFace + JWT sessions, containerized with Gunicorn.",
     bullets: [
       "Developed facial authentication with DeepFace and TensorFlow embeddings.",

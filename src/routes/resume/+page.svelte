@@ -41,9 +41,13 @@
         <a href="https://github.com/SkutM" target="_blank" rel="noopener">github.com/SkutM</a>
       </p>
       <p>
-        <button class="pdf-button" on:click={() => window.print()}>
-          Download as PDF
-        </button>
+        Portfolio:
+        <a href="https://github.com/SkutM" target="_blank" rel="noopener">skutm.github.io/full-stack-portfolio</a>
+      </p>
+      <p>
+        <!-- <button class="pdf-button" on:click={() => window.print()}>
+          Download as PDF skutm.github.io/full-stack-portfolio
+        </button> -->
       </p>
     </section>
   </header>
@@ -140,11 +144,11 @@
           (<code>exclude_unset=True</code>) and added server-side <strong>Open Library</strong> cover fetching.
         </li>
       </ul>
-      <a href={`${base}/projects/reading-tracker`}>View Detail Page →</a>
+      <!-- <a href={`${base}/projects/reading-tracker`}>View Detail Page →</a> -->
     </div>
 
     <div class="project-item">
-      <h4>2. Skut-Face (Facial Recognition Authentication)</h4>
+      <h4>2. SkutFace (Facial Recognition Authentication)</h4>
       <ul>
         <li>
           Developed a <strong>full-stack authentication system</strong> using <strong>Flask</strong> and the
@@ -159,7 +163,7 @@
           readiness.
         </li>
       </ul>
-      <a href={`${base}/projects/skut-face`}>View Detail Page →</a>
+      <!-- <a href={`${base}/projects/skut-face`}>View Detail Page →</a> -->
     </div>
 
     <div class="project-item">
@@ -174,7 +178,7 @@
           manipulation.
         </li>
       </ul>
-      <a href={`${base}/projects/sorting-visualizer`}>View Detail Page →</a>
+      <!-- <a href={`${base}/projects/sorting-visualizer`}>View Detail Page →</a> -->
     </div>
   </section>
 
