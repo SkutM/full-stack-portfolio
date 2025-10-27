@@ -58,7 +58,7 @@ function scrollOnOpen(node: HTMLDetailsElement) {
         rel="noopener"
       >🚀 Try it out</a>
       <p class="note">
-        Note: Requires Vercel login. Backend on Render — may take a few seconds on first request.
+        Note: Backend on Render — first request may take up to a minute to process.
       </p>
       {#if project.links.repo}
         <a class="btn ghost" href={project.links.repo} target="_blank" rel="noopener">Repo</a>

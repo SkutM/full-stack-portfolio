@@ -53,7 +53,7 @@
   <section class="summary">
     <h3>Professional Summary</h3>
     <p>
-      Highly motivated <strong>Full-Stack Developer</strong> with extensive experience in modern, dynamic application architecture
+      Highly motivated <strong>Full-Stack Developer</strong> with experience in modern, dynamic application architecture
       (<strong>SvelteKit/TypeScript</strong>) and scalable backend APIs (<strong>FastAPI/SQLAlchemy</strong>).
       Proven ability to engineer secure authentication flows (<strong>JWT</strong>), resolve complex synchronization
       issues, and design systems that balance clarity, performance, and maintainability.
