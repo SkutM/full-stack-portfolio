@@ -25,6 +25,7 @@
   <header class="header">
     <h1>Scott Miller</h1>
     <h2>Full-Stack Software Developer</h2>
+    <p class="location">San Jose, CA</p>
     <section class="contact-info">
       <p>
         Email:
@@ -144,7 +145,7 @@
           (<code>exclude_unset=True</code>) and added server-side <strong>Open Library</strong> cover fetching.
         </li>
       </ul>
-      <!-- <a href={`${base}/projects/reading-tracker`}>View Detail Page →</a> -->
+      <a href={`${base}/projects/reading-tracker`}>View Detail Page →</a>
     </div>
 
     <div class="project-item">
@@ -163,7 +164,7 @@
           readiness.
         </li>
       </ul>
-      <!-- <a href={`${base}/projects/skut-face`}>View Detail Page →</a> -->
+      <a href={`${base}/projects/skut-face`}>View Detail Page →</a>
     </div>
 
     <div class="project-item">
@@ -178,14 +179,14 @@
           manipulation.
         </li>
       </ul>
-      <!-- <a href={`${base}/projects/sorting-visualizer`}>View Detail Page →</a> -->
+      <a href={`${base}/projects/sorting-visualizer`}>View Detail Page →</a>
     </div>
   </section>
 
   <section class="education">
     <h3>Education</h3>
     <h4>University of California, Santa Cruz</h4>
-    <p class="dates">B.S., Computer Science: Game Design | Graduated: June 2025</p>
+    <p class="dates">B.S., Computer Science | Graduated: June 2025</p>
   </section>
 </div>
 
