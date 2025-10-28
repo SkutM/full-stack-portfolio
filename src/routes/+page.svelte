@@ -82,7 +82,7 @@
     </ul>
 
     <p class="blurb">
-      Recently: Shipped & deployed Reading Tracker (SvelteKit + FastAPI + Turso) and Skut-Face facial auth prototype (Flask + TensorFlow).
+      Currently: Expanding Reading Tracker with social features and analytics.
     </p>
   </section>
 </div>
