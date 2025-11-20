@@ -113,7 +113,7 @@
 
   <!-- Links -->
   <section class="links">
-    <a href="/projects">← Back to Projects</a>
+    <a href="{base}/projects">← Back to Projects</a>
     {#if project.links.repo}
       <a href={project.links.repo} target="_blank" rel="noopener">Repo →</a>
     {/if}
