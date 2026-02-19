@@ -82,7 +82,8 @@
     </ul>
 
     <p class="blurb">
-      Currently: Expanding Reading Tracker with social features and analytics.
+      Recently: launched Social Readia, a social extension to Reading Tracker
+      featuring a public feed, likes, and comments.
     </p>
   </section>
 </div>

@@ -53,7 +53,7 @@ function scrollOnOpen(node: HTMLDetailsElement) {
     <div class="cta-row">
       <a
         class="btn primary"
-        href="https://reading-tracker-ncyk15tbq-scotts-projects-69acb861.vercel.app/"
+        href="https://reading-tracker-omega.vercel.app/feed"
         target="_blank"
         rel="noopener"
       >🚀 Try it out</a>
@@ -101,20 +101,33 @@ function scrollOnOpen(node: HTMLDetailsElement) {
 
     <!-- Recent updates blurb -->
     <div class="updates">
-      <strong>Recent updates:</strong> fully deployed and working — <em>Vercel</em> (SvelteKit frontend) +
-      <em>Render</em> (FastAPI backend) + <em>Turso</em> (LibSQL) for persistent storage, with refined CORS,
-      auth flows, and a hardened API client.
+      <strong>Recent updates:</strong> added <em>Social Readia</em> —
+a social layer built on top of Reading Tracker featuring a public feed,
+likes, and comments.
     </div>
+
+
   </section>
 
-  <figure class="gallery">
-    <img
-      src={`${assets}/images/reading-tracker/readingtracker_gif.gif`}
-      alt="Reading Tracker gif"
-      loading="lazy"
-    />
-    <figcaption>Reading Tracker Register/Login & CRUD</figcaption>
-  </figure>
+  <div class="gallery-row">
+    <figure class="gallery">
+      <img
+        src={`${assets}/images/reading-tracker/readingtracker_gif.gif`}
+        alt="Reading Tracker gif"
+        loading="lazy"
+      />
+      <figcaption>Reading Tracker Register/Login &amp; CRUD</figcaption>
+    </figure>
+
+    <figure class="gallery">
+      <img
+        src={`${assets}/images/reading-tracker/social_readia.gif`}
+        alt="Social Readia feed demonstration"
+        loading="lazy"
+      />
+      <figcaption>Social Readia Feed Demonstration</figcaption>
+    </figure>
+  </div>
 
   <!-- Architecture -->
   <section class="card section">
@@ -124,10 +137,24 @@ function scrollOnOpen(node: HTMLDetailsElement) {
       <div>
         <h3>System Overview</h3>
         <ul class="bullets">
-          <li><strong>SvelteKit ↔ FastAPI</strong>: SvelteKit handles routes/UI/state; FastAPI exposes REST for auth/CRUD.</li>
-          <li><strong>Vite Proxy</strong> (dev): forwards <code>/api</code> to FastAPI to bypass CORS locally.</li>
-          <li><strong>JWT Auth</strong>: access/refresh tokens; protected routes; per-user data isolation.</li>
-          <li><strong>Alembic</strong> keeps schema changes consistent across environments.</li>
+          <li>
+            <strong>SvelteKit ↔ FastAPI</strong>: SvelteKit handles routes/UI/state;
+            FastAPI exposes REST endpoints for auth, CRUD, and social features.
+          </li>
+          <li>
+            <strong>Reading Tracker Core</strong>: authenticated personal book/review management.
+          </li>
+          <li>
+            <strong>Social Readia</strong>: public feed, likes, comments,
+            and visibility rules layered on top of the same foundation.
+          </li>
+          <li>
+            <strong>JWT Auth</strong>: access/refresh tokens; protected routes;
+            per-user data isolation.
+          </li>
+          <li>
+            <strong>Alembic</strong> ensures consistent schema evolution across environments.
+          </li>
         </ul>
       </div>
 
@@ -135,9 +162,18 @@ function scrollOnOpen(node: HTMLDetailsElement) {
         <h3>Data & Auth Pipeline</h3>
         <ul class="bullets">
           <li><strong>Login/Register</strong> → server verifies → issues JWT pair.</li>
-          <li><strong>authStore</strong> persists token; API client auto-attaches <code>Authorization</code>.</li>
-          <li><strong>Pydantic + SQLAlchemy</strong> models; safe partial updates via <code>exclude_unset=True</code>.</li>
-          <li><strong>Open Library API</strong> (server-side) to attach cover images during book creation.</li>
+          <li>
+            <strong>authStore</strong> persists token; API client auto-attaches
+            <code>Authorization: Bearer</code>.
+          </li>
+          <li>
+            <strong>Pydantic + SQLAlchemy</strong> models; safe partial updates via
+            <code>exclude_unset=True</code>.
+          </li>
+          <li>
+            <strong>Open Library API</strong> (server-side) attaches cover images
+            during book creation.
+          </li>
         </ul>
       </div>
     </div>
@@ -146,24 +182,67 @@ function scrollOnOpen(node: HTMLDetailsElement) {
       <div>
         <h3>Backend (FastAPI)</h3>
         <ul class="bullets">
-          <li><code>main.py</code> — App factory, CORS, routers, <code>/books</code> CRUD (auth-protected).</li>
-          <li><code>auth_routes.py</code> — <code>/auth/register</code>, <code>/auth/login</code>, profile endpoints; issues/validates JWT.</li>
-          <li><code>jwt_utils.py</code> — create/decode tokens; <code>get_current_user</code> dependency.</li>
-          <li><code>auth_models.py</code> / <code>models.py</code> — SQLAlchemy models for <code>User</code> and <code>Book</code>.</li>
-          <li><code>auth_schemas.py</code> / <code>schemas.py</code> — Pydantic DTOs with <code>from_attributes</code>.</li>
-          <li><code>database.py</code> — engine/session, shared <code>Base</code>, dependency <code>get_db</code> (LibSQL via Turso in prod; SQLite fallback locally).</li>
-          <li><code>config.py</code> — settings (secrets, JWT algorithm/expirations, DB URL).</li>
+          <li>
+            <code>main.py</code> — App factory, CORS, router wiring,
+            protected CRUD + feed endpoints.
+          </li>
+          <li>
+            <code>auth_routes.py</code> — <code>/auth/register</code>,
+            <code>/auth/login</code>, profile endpoints; issues/validates JWT.
+          </li>
+          <li>
+            <code>services/feed.py</code> — Public feed logic, sorting,
+            pagination, like/comment aggregation.
+          </li>
+          <li>
+            <code>jwt_utils.py</code> — create/decode tokens;
+            <code>get_current_user</code> dependency.
+          </li>
+          <li>
+            <code>models.py</code> — SQLAlchemy models:
+            <code>User</code>, <code>Book</code>, <code>Like</code>, <code>Comment</code>.
+          </li>
+          <li>
+            <code>schemas.py</code> — Pydantic DTOs with
+            <code>from_attributes</code>.
+          </li>
+          <li>
+            <code>database.py</code> — engine/session, shared <code>Base</code>,
+            dependency <code>get_db</code> (LibSQL via Turso in prod; SQLite locally).
+          </li>
+          <li>
+            <code>config.py</code> — settings (secrets, JWT expirations, DB URL).
+          </li>
         </ul>
       </div>
 
       <div>
         <h3>Frontend (SvelteKit)</h3>
         <ul class="bullets">
-          <li><code>authStore.ts</code> — Central store for token + user (<code>login()</code>/<code>logout()</code>), persists across reloads.</li>
-          <li><code>api.ts</code> — Typed API client: merged headers, safe JSON parse, consistent <code>Bearer</code>.</li>
-          <li><code>LoginForm.svelte</code> / <code>RegisterForm.svelte</code> — Auth flows with inline validation & errors.</li>
-          <li><code>BookManager.svelte</code> — Authorized CRUD UI: create/edit/delete, cover-fetch, optimistic UI.</li>
-          <li><code>types.ts</code> — Shared DTOs (<code>User</code>, <code>Book</code>, <code>LoginResponse</code>).</li>
+          <li>
+            <code>authStore.ts</code> — Central store for token + user,
+            persists across reloads.
+          </li>
+          <li>
+            <code>api.ts</code> — Typed API client; merged headers;
+            consistent <code>Bearer</code> handling.
+          </li>
+          <li>
+            <code>BookManager.svelte</code> — Authenticated CRUD UI
+            for personal reading tracker.
+          </li>
+          <li>
+            <code>Feed/+page.svelte</code> — Public Social Readia feed
+            with sorting + pagination.
+          </li>
+          <li>
+            <code>CommentForm.svelte</code> / <code>CommentList.svelte</code>
+            — Componentized social interactions.
+          </li>
+          <li>
+            <code>types.ts</code> — Shared DTOs
+            (<code>User</code>, <code>Book</code>, feed items).
+          </li>
         </ul>
       </div>
     </div>
@@ -171,12 +250,20 @@ function scrollOnOpen(node: HTMLDetailsElement) {
     <div style="margin-top:12px;">
       <h3>Request Flow</h3>
       <pre style="white-space:pre-wrap; margin:0; color:#b0b0b0;">
-Client → <strong>Login/Register</strong> → FastAPI (<strong>JWT</strong>) → <strong>authStore</strong> saves token
-Client (Bearer) → <strong>/books</strong> CRUD → FastAPI (Pydantic/SQLAlchemy, <code>exclude_unset=True</code>)
-Open Library fetch (server) → persist cover URL → response → UI updates
+  Client → Login/Register → FastAPI (JWT) → authStore saves token
+
+  Reading Tracker:
+  Client (Bearer) → /books CRUD → FastAPI (Pydantic + SQLAlchemy)
+  → DB persist → response → UI updates
+
+  Social Readia:
+  Client → /feed (public) → FastAPI service layer
+  → aggregate likes/comments → return paginated items
+  → UI renders feed with interactive components
       </pre>
     </div>
   </section>
+
 
   <!-- Demo — CRUD -->
   <section class="card section">
@@ -316,6 +403,26 @@ Open Library fetch (server) → persist cover URL → response → UI updates
   .gallery img {
     width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid #222;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); object-fit: contain;
+  }
+    .gallery-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin: 20px auto;
+    max-width: 1100px;
+  }
+
+  @media (min-width: 900px) {
+    .gallery-row {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+  }
+
+  /* override the single-gallery sizing so two-up doesn’t get huge */
+  .gallery {
+    margin: 0;
+    max-width: none;
   }
   .gallery figcaption { color: #8b949e; font-size: 0.9rem; margin-top: 0.5rem; text-align: center; }
 

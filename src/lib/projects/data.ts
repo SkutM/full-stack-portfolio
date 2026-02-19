@@ -18,11 +18,12 @@ export const projects: Project[] = [
   {
     slug: "reading-tracker",
     title: "Reading Tracker (SvelteKit + FastAPI)",
-    short: "JWT-secured reading tracker with Vite proxy + Alembic migrations.",
+    short:
+      "JWT-secured reading tracker with Alembic migrations — plus Social Readia: an extension for public feed, likes, and comments.",
     bullets: [
-      "Implemented token-based data ownership and secure JWT authorization.",
-      "Resolved path synchronization via Vite proxy; applied Alembic for schema migrations.",
-      "Built scalable API schemas using Pydantic and SQLAlchemy with ( `exclude_unset=True` ) to ensure safe partial updates and prevent data loss during PATCH operations."
+      "Built a JWT-secured Reading Tracker with token-based ownership and authorization.",
+      "Implemented Alembic migrations and a clean FastAPI + SQLAlchemy service layer with Pydantic schemas.",
+      "Added Social Readia as an optional social layer: public feed, likes, comments, and visibility rules on top of the tracker foundation."
     ],
     stack: ["SvelteKit", "TypeScript", "FastAPI", "SQLAlchemy", "Alembic"],
     links: {
