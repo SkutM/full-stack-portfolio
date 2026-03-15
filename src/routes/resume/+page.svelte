@@ -16,7 +16,6 @@
   }
 </script>
 
-
 <div class:dark-mode={darkMode} class="resume-container">
   <button class="theme-toggle" on:click={toggleTheme}>
     {#if darkMode} ☀️ Light Mode (Recommended) {:else} 🌙 Dark Mode{/if}
@@ -24,7 +23,7 @@
 
   <header class="header">
     <h1>Scott Miller</h1>
-    <h2>Full-Stack Software Developer</h2>
+    <h2>Software Engineer | Backend & Full-Stack</h2>
     <p class="location">San Jose, CA</p>
     <section class="contact-info">
       <p>
@@ -43,7 +42,9 @@
       </p>
       <p>
         Portfolio:
-        <a href="https://github.com/SkutM" target="_blank" rel="noopener">skutm.github.io/full-stack-portfolio</a>
+        <a href="https://skutm.github.io/full-stack-portfolio" target="_blank" rel="noopener">
+          skutm.github.io/full-stack-portfolio
+        </a>
       </p>
       <p>
         <!-- <button class="pdf-button" on:click={() => window.print()}>
@@ -58,10 +59,10 @@
   <section class="summary">
     <h3>Professional Summary</h3>
     <p>
-      Highly motivated <strong>Full-Stack Developer</strong> with experience in modern, dynamic application architecture
-      (<strong>SvelteKit/TypeScript</strong>) and scalable backend APIs (<strong>FastAPI/SQLAlchemy</strong>).
-      Proven ability to engineer secure authentication flows (<strong>JWT</strong>), resolve complex synchronization
-      issues, and design systems that balance clarity, performance, and maintainability.
+      Software engineer with experience building <strong>backend services</strong> and
+      <strong>full-stack applications</strong> using <strong>Python, FastAPI, SvelteKit, and TypeScript</strong>.
+      Skilled in designing <strong>REST APIs</strong>, secure authentication flows, asynchronous processing pipelines,
+      and cloud-style architectures using <strong>PostgreSQL, Redis, Docker, and S3-compatible object storage</strong>.
     </p>
   </section>
 
@@ -80,16 +81,19 @@
         <h4>Backend & API</h4>
         <ul>
           <li><strong>Python</strong> (FastAPI / Flask)</li>
+          <li>REST API Design</li>
           <li>JWT Auth / Passlib (Security)</li>
           <li>Alembic (Schema Migrations)</li>
         </ul>
       </div>
       <div>
-        <h4>Database & Tools</h4>
+        <h4>Database, Cloud & Tools</h4>
         <ul>
-          <li><strong>Turso (LibSQL)</strong> / SQLite / PostgreSQL</li>
+          <li><strong>PostgreSQL / SQLite / Turso (LibSQL)</strong></li>
           <li><strong>SQLAlchemy (ORM)</strong> / Pydantic (Validation)</li>
-          <li>Git / GitHub / Render / Vercel (Deployment)</li>
+          <li><strong>Redis / RQ Workers</strong></li>
+          <li><strong>Docker / Docker Compose</strong></li>
+          <li>Git / GitHub / Render / Vercel</li>
         </ul>
       </div>
       <div>
@@ -102,7 +106,6 @@
       </div>
     </div>
   </section>
-
 
   <section class="experience">
     <h3>Relevant Experience</h3>
@@ -125,7 +128,30 @@
     <h3>Key Projects</h3>
 
     <div class="project-item">
-      <h4>1. Reading Tracker (SvelteKit / FastAPI)</h4>
+      <h4>1. Cloud Image Processor API (FastAPI / Redis / Docker)</h4>
+      <ul>
+        <li>
+          Built a <strong>cloud-style image processing backend</strong> supporting file uploads, metadata storage,
+          and asynchronous thumbnail generation through a REST API.
+        </li>
+        <li>
+          Implemented a <strong>background job pipeline</strong> with <strong>Redis + RQ workers</strong> to process
+          image variants without blocking API requests.
+        </li>
+        <li>
+          Separated <strong>S3-compatible object storage</strong> from relational metadata stored in
+          <strong>PostgreSQL</strong>, reflecting an AWS-style cloud architecture.
+        </li>
+        <li>
+          Containerized the multi-service environment using <strong>Docker Compose</strong>
+          (API, worker, Redis, Postgres).
+        </li>
+      </ul>
+      <a href={`${base}/projects/cloud-image-processor-api`}>View Detail Page →</a>
+    </div>
+
+    <div class="project-item">
+      <h4>2. Reading Tracker + Social Feed (SvelteKit / FastAPI)</h4>
       <ul>
         <li>
           <strong>Developed</strong> and <strong>deployed</strong> a production-ready <strong>full-stack web app</strong> using
@@ -149,7 +175,7 @@
     </div>
 
     <div class="project-item">
-      <h4>2. SkutFace (Facial Recognition Authentication)</h4>
+      <h4>3. SkutFace (Facial Recognition Authentication)</h4>
       <ul>
         <li>
           Developed a <strong>full-stack authentication system</strong> using <strong>Flask</strong> and the
@@ -168,7 +194,7 @@
     </div>
 
     <div class="project-item">
-      <h4>3. Sorting Visualizer (Python / Pygame)</h4>
+      <h4>4. Sorting Visualizer (Python / Pygame)</h4>
       <ul>
         <li>
           Built an interactive Python visualizer using generator-based sorting algorithms (<strong>yield / yield from</strong>)
@@ -191,17 +217,15 @@
 </div>
 
 <style>
-
   section {
-  margin-top: 2.2em;  /* increase space between sections */
-}
+    margin-top: 2.2em;
+  }
 
   :root {
-    /* Pure white + black body, with subtle contrast for name/links */
     --bg: #ffffff;
     --text: #000000;
-    --link: #2b2b2b;   /* name + links */
-    --accent: #3a3a3a; /* subheads, borders */
+    --link: #2b2b2b;
+    --accent: #3a3a3a;
   }
 
   .dark-mode {
@@ -212,7 +236,7 @@
   }
 
   .resume-container {
-    position: relative;              /* ✅ key fix: anchor the toggle here */
+    position: relative;
     background-color: var(--bg);
     color: var(--text);
     padding: 40px;
@@ -228,7 +252,7 @@
     position: absolute;
     top: 12px;
     right: 12px;
-    z-index: 0;                     /* ✅ make sure it sits above */
+    z-index: 0;
     border: 1px solid var(--link);
     background: transparent;
     color: var(--link);
@@ -245,7 +269,6 @@
     color: var(--bg);
   }
 
-  /* keep your existing styles … */
   h1 { color: var(--link); }
   h2 { color: var(--accent); }
   a  { color: var(--link); }
@@ -256,29 +279,23 @@
     .resume-container { box-shadow: none; }
   }
 
-  /* Keep the compact spacing in the skills section */
-.skills ul li {
-  margin-bottom: 0; /* or a tiny 0.2em if you want minimal space */
-  line-height: 1.4;
-}
+  .skills ul li {
+    margin-bottom: 0;
+    line-height: 1.4;
+  }
 
-/* Add more spacing for bullets in later sections */
-.experience ul li,
-.projects ul li {
-  margin-bottom: 0.6em; /* adds comfortable visual separation */
-  line-height: 1.6;
-}
+  .experience ul li,
+  .projects ul li {
+    margin-bottom: 0.6em;
+    line-height: 1.6;
+  }
 
-.summary h3 {
-  margin-bottom: 0.6em; /* space between the heading and paragraph */
-}
+  .summary h3 {
+    margin-bottom: 0.6em;
+  }
 
-.summary p {
-  line-height: 1.7;     /* easier to read */
-  margin-bottom: 1em;   /* adds slight separation below */
-}
-
-
-
-
+  .summary p {
+    line-height: 1.7;
+    margin-bottom: 1em;
+  }
 </style>

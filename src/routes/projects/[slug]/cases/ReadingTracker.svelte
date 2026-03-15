@@ -330,7 +330,7 @@ likes, and comments.
       <a href={project.links.live} target="_blank" rel="noopener">Live →</a>
     {/if}
     <a
-      href="https://reading-tracker-ncyk15tbq-scotts-projects-69acb861.vercel.app/"
+      href="https://reading-tracker-omega.vercel.app/feed"
       target="_blank"
       rel="noopener"
     >Reading Tracker (Live) →</a>

@@ -1,6 +1,10 @@
 // Project Data
 
-export type Slug = 'reading-tracker' | 'skut-face' | 'sorting-visualizer';
+export type Slug =
+  | 'reading-tracker'
+  | 'skut-face'
+  | 'sorting-visualizer'
+  | 'cloud-image-processor-api';
 
 export type Project = {
   slug: Slug;
@@ -12,7 +16,6 @@ export type Project = {
   heroImage?: string;
   gallery?: string[];
 };
-
 
 export const projects: Project[] = [
   {
@@ -70,5 +73,24 @@ export const projects: Project[] = [
       "/images/sorting-visualizer/merge.png",
       "/images/sorting-visualizer/quick.png"
     ]
+  },
+  {
+    slug: "cloud-image-processor-api",
+    title: "Cloud Image Processor API",
+    short:
+      "A cloud-style media processing backend with async thumbnail generation, object storage, background workers, and containerized infrastructure.",
+    bullets: [
+      "Built a FastAPI backend for image uploads, metadata storage, and retrieval through REST endpoints.",
+      "Separated object storage from relational metadata using S3-compatible storage for originals and processed variants.",
+      "Implemented asynchronous thumbnail generation with Redis and RQ workers.",
+      "Containerized the API, worker, Redis, and Postgres services with Docker Compose to simulate a production-style cloud environment."
+    ],
+    stack: ["FastAPI", "Postgres", "Redis", "RQ", "Docker", "S3"],
+    links: {
+      detail: "/projects/cloud-image-processor-api",
+      repo: "https://github.com/SkutM/cloud-image-processor-api",
+      live: ""
+    },
+    heroImage: "/images/cloudimage/cloudimgport01.png",
   }
 ];

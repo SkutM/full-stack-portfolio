@@ -49,7 +49,15 @@
               alt="Sorting Visualizer Animated Preview"
               loading="lazy"
             />
-          {/if}
+          
+            {:else if project.slug === 'cloud-image-processor-api'}
+            <img
+              src={`${assets}/images/cloudimage/cloudimgport01.png`}
+              alt="Cloud Image Processor Architecture"
+              loading="lazy"
+            />
+
+            {/if}
         </div>
 
         <div class="project-content">
@@ -183,4 +191,36 @@
     transform: translateX(4px);
     text-decoration: underline;
   }
+
+  .cloud-preview {
+    width: 100%;
+    min-height: 180px;
+    border-radius: 8px;
+    background:
+      radial-gradient(circle at top, rgba(0, 188, 212, 0.18), transparent 45%),
+      linear-gradient(180deg, #101416 0%, #0c0f11 100%);
+    border: 1px solid #1f2a2f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+  }
+
+  .cloud-preview-inner {
+    width: 100%;
+    display: grid;
+    gap: 10px;
+  }
+
+  .cloud-preview-inner span {
+    display: block;
+    text-align: center;
+    color: #dbeef2;
+    font-weight: 600;
+    padding: 0.7rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid #294047;
+    background: rgba(17, 24, 27, 0.95);
+  }
+
 </style>

@@ -52,9 +52,7 @@
     <p class="role">Full-Stack Developer</p>
 
     <p class="tagline">
-      I build full-stack applications with <strong>SvelteKit</strong> and
-      <strong>TypeScript</strong>, designed for security, scalability, and
-      long-term maintainability.
+      I build <strong>backend services</strong> and <strong>full-stack applications</strong> with a focus on clear architecture, reliable APIs, and scalable systems.
     </p>
 
     <div class="links">
@@ -82,8 +80,7 @@
     </ul>
 
     <p class="blurb">
-      Recently: launched Social Readia, a social extension to Reading Tracker
-      featuring a public feed, likes, and comments.
+      Recently: built a Cloud Image Processor API featuring S3-style object storage, background thumbnail generation, and asynchronous processing with Redis workers.
     </p>
   </section>
 </div>
